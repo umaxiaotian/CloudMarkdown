@@ -20,6 +20,9 @@ module.exports = {
   modules: [
     '@nuxtjs/vuetify'
   ],
+  server: {
+    port: 8080
+  },
   vuetify: {
     theme: {
       themes: {
