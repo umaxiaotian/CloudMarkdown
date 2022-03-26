@@ -91,7 +91,7 @@ export default {
   }),
   head () {
     return {
-      title: 'MsdMD Code'
+      title: 'CloudMarkdownForWEB'
     }
   },
   created () {
