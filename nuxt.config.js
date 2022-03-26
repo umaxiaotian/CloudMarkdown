@@ -7,7 +7,7 @@ module.exports = {
   ssr: false,
   target: 'static',
   head: {
-    title: 'MsdMD Code',
+    title: 'CloudMarkdownForWEB',
     meta: [{ charset: 'utf-8' }]
   },
   loading: false,
