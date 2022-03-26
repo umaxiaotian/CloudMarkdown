@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'CloudMarkdown'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_0D8B22BD03D947D4ACA53E5DE9E90433 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_34422842793C496382A7ADF370F6F446 }}
           package: .
