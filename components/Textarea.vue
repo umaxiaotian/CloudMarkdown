@@ -8,6 +8,7 @@
         wrap="off"
         @scroll="scrollEditor()"
         @input="changeEditor"
+        v-on:keydown="undoRedo"
       />
     </div>
   </v-app>
@@ -31,6 +32,9 @@ export default {
       lineCountCache: 0,
       codeEditor: "",
       lineCounter: "",
+      history: [],
+      history_position: 0,
+      editFlg: false,
     };
   },
   computed: {},
@@ -38,10 +42,33 @@ export default {
     mainText(value) {
       document.getElementById("codeEditor").value = value;
       this.line_counter(value);
-      // document.getElementById("codeEditor").focus();
+      this.changeEditor();
+      //更新値と格納値が同値でなければ更新値を履歴として保存する
+      if (
+        (value != this.history[this.history_position - 1] &&
+          this.history_position != 0 &&
+          this.history_position == this.history.length) ||
+        this.editFlg == false
+      ) {
+        this.history.push(value);
+        this.history_position = this.history.length;
+        this.editFlg = true;
+      } else {
+        if (
+          value != this.history[this.history_position - 1] &&
+          this.history[this.history_position - 1] != null
+        ) {
+          //CTRL+Zをした後にキーボード入力されたら入力された以降のARRAYを削除する。
+          for (var i = this.history_position; i <= this.history.length; i++) {
+            console.log("削除" + i);
+            this.history.length--;
+            delete this.history[i];
+          }
+          this.editFlg == false;
 
-      //戻る機能を実装しようと思ったが、現在Clpboard製造中で、execCommmandは廃止の動きのためいったんこのまま
-      // document.execCommand('insertText', false, value);
+          console.log(this.history);
+        }
+      }
     },
     scrollTop(value) {
       document.getElementById("codeEditor").scrollTop = value;
@@ -51,13 +78,78 @@ export default {
   mounted() {
     this.codeEditor = document.getElementById("codeEditor");
     this.lineCounter = document.getElementById("lineCounter");
-    // document.getElementById("codeEditor").textContent = this.mainText;
     this.$store.commit("editorDefine", document.getElementById("codeEditor"));
     this.$emit("codeEditorDefine", document.getElementById("codeEditor"));
   },
   methods: {
     changeEditor() {
       this.$emit("input", document.getElementById("codeEditor").value);
+    },
+    undoRedo(event) {
+      //ZYキーの無効化
+      if (event.ctrlKey) {
+        switch (event.key) {
+          case "z":
+            this.undoRedoPosition("undo");
+            // console.log(this.history);
+            event.preventDefault();
+            break;
+          case "y":
+            this.undoRedoPosition("redo");
+            event.preventDefault();
+            break;
+        }
+      }
+    },
+    //UNDO REDO
+    undoRedoPosition(event) {
+      if (event == "undo" && this.history_position > 0) {
+        this.history_position--;
+      }
+      if (event == "redo" && this.history_position < this.history.length) {
+        this.history_position++;
+      }
+
+      var text = this.history[this.history_position - 1];
+      if (this.history_position == 0) {
+        text = "";
+      }
+
+      document.getElementById("codeEditor").value = text;
+      this.line_counter(text);
+      this.changeEditor();
+
+      if (this.history_position != 0) {
+        this.changeEditor();
+      } else if (this.history_position == 0 && this.editFlg != false) {
+        this.$swal
+          .fire({
+            title: "データクリア",
+            text: "これ以上戻るということはこのテキストの一時データをクリアし、新規でテキストを作成することを意味していますがよろしいですか？",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "はい",
+            cancelButtonText: "いいえ",
+          })
+          .then((result) => {
+            if (result.isConfirmed) {
+              this.resetEditor();
+            } else {
+              this.history_position = 0;
+              //一個進んであげる（親切）
+              this.undoRedoPosition("redo");
+            }
+          });
+      }
+    },
+    resetEditor() {
+      // 変数初期化
+      this.history = [];
+      this.history_position = 0;
+      this.editFlg = false;
+      this.changeEditor();
     },
     scrollEditor() {
       this.lineCounter.scrollTop = this.codeEditor.scrollTop;
@@ -77,12 +169,14 @@ export default {
         this.codeEditor.value =
           value.slice(0, selectionStart) + "\t" + value.slice(selectionEnd);
         this.codeEditor.setSelectionRange(
-          selectionStart + 2,
-          selectionStart + 2
+          selectionStart + 1,
+          selectionStart + 1
         );
+        this.codeEditor();
       }
     },
 
+    //コードエディタの行数カウント
     line_counter(val) {
       const lineCount = val.split("\n").length;
       const outarr = new Array();

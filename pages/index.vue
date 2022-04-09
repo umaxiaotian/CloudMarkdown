@@ -11,13 +11,16 @@
     >
       <v-avatar
         class="d-block text-center mx-auto mt-4"
-        color="grey darken-1"
+        color="blue darken-1"
         size="36"
-      />
+      >
+        <v-icon dark> mdi-draw </v-icon>
+      </v-avatar>
+
       <v-divider class="mx-3 my-5" />
       <div class="mb-5 d-flex justify-center align-center">
         <v-btn icon @click="clickToolBar">
-          <v-avatar :size="26">
+          <v-avatar :size="30" color="green darken-1">
             <v-icon dark> mdi-hammer-wrench </v-icon>
           </v-avatar>
         </v-btn>
@@ -26,7 +29,7 @@
         <div class="mb-5 d-flex justify-center align-center">
           <v-btn icon>
             <v-avatar :size="26">
-              <img src="//www.gravatar.com/avatar/none?f=y&d=mm">
+              <v-icon dark> mdi-unicode </v-icon>
             </v-avatar>
           </v-btn>
         </div>
@@ -49,64 +52,52 @@
 </template>
 
 <script>
-import Editor from '@/components/Editor'
-import Toolbar from '@/components/Toolbar'
+import Editor from "@/components/Editor";
+import Toolbar from "@/components/Toolbar";
 export default {
   components: {
     Editor,
-    Toolbar
+    Toolbar,
   },
   data: () => ({
     isShowToolbar: false,
     drawer: true,
-    appBarColor: 'grey',
-    appBarTitle: 'Tasks',
-    appBarIcon: 'mdi-lightbulb',
+    appBarColor: "grey",
+    appBarTitle: "Tasks",
+    appBarIcon: "mdi-lightbulb",
     isSearching: false,
     links: [
-      { label: 'Inbox', icon: 'mdi-inbox', color: 'background' },
+      { label: "Inbox", icon: "mdi-inbox", color: "background" },
       {
-        label: 'Planned',
-        icon: 'mdi-clock-outline',
-        color: 'background'
-      }
+        label: "Planned",
+        icon: "mdi-clock-outline",
+        color: "background",
+      },
     ],
     projects: [
-      { label: 'Accounting', color: 'cyan', due_count: 1 },
-      { label: 'Secret Game', color: 'green' },
-      { label: 'Dashboard', color: 'blue', due_count: 1 }
+      { label: "Accounting", color: "cyan", due_count: 1 },
+      { label: "Secret Game", color: "green" },
+      { label: "Dashboard", color: "blue", due_count: 1 },
     ],
-    issues: [
-      {
-        title: 'テーブル',
-        order: 1,
-        description: '表機能を追加します。デフォルトでは4x4'
-      },
-      {
-        title: '画像挿入',
-        order: 2,
-        description: '画像挿入タグを挿入します。'
-      }
-    ]
   }),
-  head () {
+  head() {
     return {
-      title: 'CloudMarkdownForWEB'
-    }
+      title: "CloudMarkdown",
+    };
   },
-  created () {
-    this.$vuetify.theme.dark = true
+  created() {
+    this.$vuetify.theme.dark = true;
   },
   methods: {
-    clickToolBar () {
+    clickToolBar() {
       if (this.isShowToolbar == false) {
-        this.isShowToolbar = true
+        this.isShowToolbar = true;
       } else {
-        this.isShowToolbar = false
+        this.isShowToolbar = false;
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 <style >
 /* ::-webkit-scrollbar {

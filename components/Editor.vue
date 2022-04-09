@@ -12,6 +12,7 @@
             id="leftEditor"
             :scroll-top="editorScrollTop"
             :main-text="markdown"
+            ref="editor"
             @textAreaScroll="editorScroll"
             @input="inputEditor"
             @codeEditorDefine="codeEditorDefine"
@@ -36,7 +37,6 @@ import { Splitpanes, Pane } from "splitpanes";
 import "splitpanes/dist/splitpanes.css";
 import Textarea from "@/components/Textarea";
 import Viewarea from "@/components/Viewarea";
-// const { ipcRenderer } = require("electron");
 export default {
   name: "Editor",
   components: { Splitpanes, Pane, Textarea, Viewarea },
@@ -66,25 +66,7 @@ export default {
     //  this.editorData = this.$store.state.markdownText;
   },
   created() {
-    // IPCでメッセージを受信してファイルの制御を行う
-    // ipcRenderer.on("main_file_message", (event, arg) => {
-    //   switch (arg) {
-    //     case "open":
-    //       // ファイルを開く
-    //       ipcRenderer.invoke("file-open").then((data) => {
-    //         this.markdown = data.returnData[0].toString();
-    //       });
-    //       break;
-    //     case "save":
-    //       // ファイルを保存
-    //       // saveFile();
-    //       break;
-    //     case "saveas":
-    //       // 名前を付けてファイルを保存
-    //       ipcRenderer.invoke("save", this.markdown);
-    //       break;
-    //   }
-    // });
+  
   },
   mounted() {
     const rView = document.getElementById("rightView");

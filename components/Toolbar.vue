@@ -75,19 +75,17 @@ export default {
       var pos_end = editorDefine.selectionEnd;
       var val = editorDefine.value;
 
-      
       if (handle == "LeftAdd") {
         var headLine = 0;
         for (let i = pos_start; i--; ) {
           var ranges = val.slice(i, pos_start);
-         if (ranges.match(/\n/)) {
+          if (ranges.match(/\n/)) {
             //改行コード2文字分を加算
-            headLine = i+1
-             ;
+            headLine = i + 1;
             break;
-          } 
+          }
         }
-   
+
         var beforeNode = val.slice(0, headLine);
         var afterNode = val.slice(headLine);
         var insertNode = mdTextHead + " ";
@@ -114,15 +112,15 @@ export default {
           { title: "中見出し(h4)", handle: "LeftAdd", mdTextHead: "####" },
           { title: "小見出し(h5)", handle: "LeftAdd", mdTextHead: "#####" },
           { title: "小見出し(h6)", handle: "LeftAdd", mdTextHead: "######" },
-            { title: "引用", handle: "LeftAdd", mdTextHead: ">" },
-             { title: "引用ネスト", handle: "LeftAdd", mdTextHead: ">>" },
+          { title: "引用", handle: "LeftAdd", mdTextHead: ">" },
+          { title: "引用ネスト", handle: "LeftAdd", mdTextHead: ">>" },
           {
             title: "太文字",
             handle: "Center",
             mdTextHead: "**",
             mdTextTail: "**",
           },
-           {
+          {
             title: "打消し線",
             handle: "Center",
             mdTextHead: "~~",
@@ -163,7 +161,12 @@ export default {
           {
             title: "水平線",
             handle: "LeftAdd",
-            mdTextHead: "---------------------------------------",
+            mdTextHead: "\n---------------------------------------\n",
+          },
+          {
+            title: "表（テーブル 2x2）",
+            handle: "LeftAdd",
+            mdTextHead: "\n\n|  TH  |  TH  |\n| ---- | ---- |\n|  TD  |  TD  |\n|  TD  |  TD  |\n\n",
           },
         ],
         title: "挿入",
