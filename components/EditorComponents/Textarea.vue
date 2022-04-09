@@ -122,8 +122,7 @@ export default {
       if (this.history_position != 0) {
         this.changeEditor();
       } else if (this.history_position == 0 && this.editFlg != false) {
-        this.$swal
-          .fire({
+        this.$swal.fire({
             title: "データクリア",
             text: "これ以上戻るということはこのテキストの一時データをクリアし、新規でテキストを作成することを意味していますがよろしいですか？",
             icon: "warning",

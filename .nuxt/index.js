@@ -14,6 +14,7 @@ import { createStore } from './store.js'
 /* Plugins */
 
 import nuxt_plugin_plugin_31a56e68 from 'nuxt_plugin_plugin_31a56e68' // Source: .\\vuetify\\plugin.js (mode: 'all')
+import nuxt_plugin_vuesweetalert2_6151d7bc from 'nuxt_plugin_vuesweetalert2_6151d7bc' // Source: .\\vue-sweetalert2.js (mode: 'client')
 import nuxt_plugin_markdownit_ee16af56 from 'nuxt_plugin_markdownit_ee16af56' // Source: ..\\plugins\\markdown-it (mode: 'all')
 
 // Component: <ClientOnly>
@@ -210,6 +211,10 @@ async function createApp(ssrContext, config = {}) {
 
   if (typeof nuxt_plugin_plugin_31a56e68 === 'function') {
     await nuxt_plugin_plugin_31a56e68(app.context, inject)
+  }
+
+  if (process.client && typeof nuxt_plugin_vuesweetalert2_6151d7bc === 'function') {
+    await nuxt_plugin_vuesweetalert2_6151d7bc(app.context, inject)
   }
 
   if (typeof nuxt_plugin_markdownit_ee16af56 === 'function') {

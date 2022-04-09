@@ -35,8 +35,8 @@
 <script>
 import { Splitpanes, Pane } from "splitpanes";
 import "splitpanes/dist/splitpanes.css";
-import Textarea from "@/components/Textarea";
-import Viewarea from "@/components/Viewarea";
+import Textarea from "@/components/EditorComponents/Textarea";
+import Viewarea from "@/components/EditorComponents/Viewarea";
 export default {
   name: "Editor",
   components: { Splitpanes, Pane, Textarea, Viewarea },
