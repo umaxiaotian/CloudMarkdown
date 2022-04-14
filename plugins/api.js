@@ -9,13 +9,14 @@ export default function ({ $axios }, inject) {
       this.axios = axios
     }
     
-    BaseUrl="http://127.0.0.1:3100";
+    BaseUrl="http://localhost:8000";
     async apiGet(url,params={}){
-        // let header= {"X-Api-Key":"TEST",'Content-Type': 'application/json',}
-        return this.axios.$get(this.BaseUrl+url,{
-            // headers: header,
+        let header= {'Content-Type': 'application/json',}
+        return await this.axios.$get(this.BaseUrl+url,{
+            headers: header,
             params: params
         })
         .catch(err => err.response || {noResponse:true})
     }
+    
 }

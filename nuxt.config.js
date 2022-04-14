@@ -24,6 +24,9 @@ module.exports = {
     'vue-sweetalert2/nuxt',
     '@nuxtjs/axios',
   ],
+  axios: {
+    proxy: true,
+  },
   server: {
     port: 8080
   },

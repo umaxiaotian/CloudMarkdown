@@ -3,12 +3,14 @@
     "name": "user-editor",
     "path": "/user/editor",
     "component": "G:\\\\WORK\\\\Documents\\\\WORK\\\\CloudMD\\\\pages\\\\user\\\\editor.vue",
-    "chunkName": "pages/user/editor"
+    "chunkName": "pages/user/editor",
+    "_name": "_7f1d1492"
   },
   {
     "name": "index",
     "path": "/",
     "component": "G:\\\\WORK\\\\Documents\\\\WORK\\\\CloudMD\\\\pages\\\\index.vue",
-    "chunkName": "pages/index"
+    "chunkName": "pages/index",
+    "_name": "_dc8c123a"
   }
 ]
