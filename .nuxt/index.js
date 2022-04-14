@@ -14,8 +14,11 @@ import { createStore } from './store.js'
 /* Plugins */
 
 import nuxt_plugin_plugin_31a56e68 from 'nuxt_plugin_plugin_31a56e68' // Source: .\\vuetify\\plugin.js (mode: 'all')
+import nuxt_plugin_axios_cfa0d76a from 'nuxt_plugin_axios_cfa0d76a' // Source: .\\axios.js (mode: 'all')
 import nuxt_plugin_vuesweetalert2_6151d7bc from 'nuxt_plugin_vuesweetalert2_6151d7bc' // Source: .\\vue-sweetalert2.js (mode: 'client')
 import nuxt_plugin_markdownit_ee16af56 from 'nuxt_plugin_markdownit_ee16af56' // Source: ..\\plugins\\markdown-it (mode: 'all')
+import nuxt_plugin_axios_2228ef02 from 'nuxt_plugin_axios_2228ef02' // Source: ..\\plugins\\axios (mode: 'all')
+import nuxt_plugin_api_caeae0b4 from 'nuxt_plugin_api_caeae0b4' // Source: ..\\plugins\\api (mode: 'all')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -80,7 +83,7 @@ async function createApp(ssrContext, config = {}) {
   // here we inject the router and store to all child components,
   // making them available everywhere as `this.$router` and `this.$store`.
   const app = {
-    head: {"title":"CloudMarkdownForWEB","meta":[{"charset":"utf-8"}],"link":[{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Roboto:100,300,400,500,700,900&display=swap"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Fcdn.jsdelivr.net\u002Fnpm\u002F@mdi\u002Ffont@latest\u002Fcss\u002Fmaterialdesignicons.min.css"}],"style":[],"script":[]},
+    head: {"title":"EngPit CMS","meta":[{"charset":"utf-8"}],"link":[{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Roboto:100,300,400,500,700,900&display=swap"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Fcdn.jsdelivr.net\u002Fnpm\u002F@mdi\u002Ffont@latest\u002Fcss\u002Fmaterialdesignicons.min.css"}],"style":[],"script":[]},
 
     store,
     router,
@@ -213,12 +216,24 @@ async function createApp(ssrContext, config = {}) {
     await nuxt_plugin_plugin_31a56e68(app.context, inject)
   }
 
+  if (typeof nuxt_plugin_axios_cfa0d76a === 'function') {
+    await nuxt_plugin_axios_cfa0d76a(app.context, inject)
+  }
+
   if (process.client && typeof nuxt_plugin_vuesweetalert2_6151d7bc === 'function') {
     await nuxt_plugin_vuesweetalert2_6151d7bc(app.context, inject)
   }
 
   if (typeof nuxt_plugin_markdownit_ee16af56 === 'function') {
     await nuxt_plugin_markdownit_ee16af56(app.context, inject)
+  }
+
+  if (typeof nuxt_plugin_axios_2228ef02 === 'function') {
+    await nuxt_plugin_axios_2228ef02(app.context, inject)
+  }
+
+  if (typeof nuxt_plugin_api_caeae0b4 === 'function') {
+    await nuxt_plugin_api_caeae0b4(app.context, inject)
   }
 
   // Lock enablePreview in context

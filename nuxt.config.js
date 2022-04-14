@@ -7,19 +7,22 @@ module.exports = {
   ssr: false,
   target: 'static',
   head: {
-    title: 'CloudMarkdownForWEB',
+    title: 'EngPit CMS',
     meta: [{ charset: 'utf-8' }]
   },
   loading: false,
   plugins: [
-    '@/plugins/markdown-it'
+    '@/plugins/markdown-it',
+    '@/plugins/axios',
+    '@/plugins/api'
   ],
   buildModules: [
     '@nuxt/typescript-build'
   ],
   modules: [
     '@nuxtjs/vuetify',
-    'vue-sweetalert2/nuxt'
+    'vue-sweetalert2/nuxt',
+    '@nuxtjs/axios',
   ],
   server: {
     port: 8080
