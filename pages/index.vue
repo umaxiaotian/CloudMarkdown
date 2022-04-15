@@ -21,30 +21,21 @@
         <v-row>
           <v-col cols="12" lg="2">
             <v-card class="mx-auto">
-              <v-sheet rounded="lg" min-height="1800" />
+              <v-sheet rounded="lg" min-height="300" />
             </v-card>
           </v-col>
           <!-- コンテンツ一覧 -->
           <v-col cols="12" lg="8">
-            <div v-for="item in article_list" :key="item.id">
-              <div class="mx-3 my-5" />
+            <div v-for="item in viewLists" :key="item.id">
               <v-card class="mx-auto" color="grey darken-2" outlined>
                 <v-list-item three-line>
                   <v-list-item-content>
-                    <div class="text-overline mb-4">記事作者：{{item.relate_user_name}}</div>
+                    <div class="text-overline mb-4">
+                      記事作者：{{ item.relate_user_name }}
+                    </div>
                     <v-list-item-title class="text-h5 mb-1">
-                      {{item.title}}
+                      <nuxt-link style="color:inherit;text-decoration:none;" to="/shop/register">{{item.title}}</nuxt-link>
                     </v-list-item-title>
-                    <v-list-item-subtitle>
-                      タグ：{{item.tag}}
-                      </v-list-item-subtitle>
-                      <v-list-item-subtitle>
-                      更新日{{item.post_date}}
-                      </v-list-item-subtitle>
-
-
-
-
                   </v-list-item-content>
                   <v-list-item-avatar
                     tile
@@ -52,18 +43,35 @@
                     color="grey"
                   ></v-list-item-avatar>
                 </v-list-item>
+                <div class="text-left">
+                  <v-chip
+                    class="ma-2"
+                    color="primary"
+                    v-for="tag in item.tags"
+                    :key="tag.id"
+                  >
+                    {{ tag.tag_name }}
+                  </v-chip>
+                </div>
                 <v-card-actions>
-                  <v-btn outlined rounded text> Button </v-btn>
+                  <v-btn  rounded   color="pink darken-3" dark >
+                    {{item.good_count}}
+                    <v-icon dark right> mdi-heart </v-icon>
+                  </v-btn>
                 </v-card-actions>
               </v-card>
               <div class="mx-3 my-5" />
             </div>
-
+            <v-pagination
+              v-model="page"
+              :length="length"
+              @input="pageChange"
+            ></v-pagination>
             <!--  -->
           </v-col>
 
           <v-col cols="12" lg="2">
-            <v-sheet rounded="lg" min-height="1800">
+            <v-sheet rounded="lg" min-height="300">
               <!--  -->
             </v-sheet>
           </v-col>
@@ -81,19 +89,30 @@ export default {
   },
   data() {
     return {
-      article_list: [],
+      page: 1,
+      length: 0,
+      lists: [],
+      viewLists: [],
+      pageSize: 3,
+      links: ["TREND", "Messages", "Profile", "ReleaseNote"],
     };
   },
-  created() {
+  async created() {
     this.$vuetify.theme.dark = true;
-  },
-  async mounted() {
+
     const article_list = await this.$api.apiGet("/article/list/");
-    console.log(article_list);
-    this.article_list = article_list;
+    this.lists = article_list;
+    this.length = Math.ceil(this.lists.length / this.pageSize);
+    this.viewLists = this.lists.slice(0, this.pageSize);
   },
-  data: () => ({
-    links: ["Dashboard", "Messages", "Profile", "Updates"],
-  }),
+
+  methods: {
+    pageChange(pageNumber) {
+      this.viewLists = this.lists.slice(
+        this.pageSize * (pageNumber - 1),
+        this.pageSize * pageNumber
+      );
+    },
+  },
 };
 </script>
