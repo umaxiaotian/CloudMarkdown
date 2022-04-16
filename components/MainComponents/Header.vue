@@ -18,7 +18,9 @@
     <v-btn icon @click="searchText()">
       <v-icon>mdi-magnify</v-icon>
     </v-btn>
-    <v-btn class="ma-2" color="blue" href="/login"> ログイン </v-btn>
+    <v-btn v-if="!isLogin" class="ma-2" color="blue" @click="login()"> ログイン </v-btn>
+     <v-btn v-if="isLogin" class="ma-2" color="blue" @click="logout()"> ログアウト </v-btn>
+ 
   </v-app-bar>
 </template>
 
@@ -27,6 +29,8 @@ export default {
   data() {
     return {
       search: "",
+      buttonText: "",
+      isLogin: false,
       article_list: [],
       model: this.$route.path,
       links: [
@@ -37,7 +41,25 @@ export default {
       ],
     };
   },
+  created(){
+     const acsessToken = this.$store.getters.accessToken;
+      const refreshToken = this.$store.getters.refreshToken;
+      if (acsessToken && refreshToken) {
+        this.isLogin= true;
+      }else{
+         this.isLogin= false;
+      }
+  },
   methods: {
+    login() {
+        this.$router.push('/login')
+    //    console.log(await this.$util.refreshTokenReLogin());
+    },
+    logout(){
+        this.$store.commit("accessToken", null);
+        this.$store.commit("refreshToken", null);
+          this.$router.push('/login')
+    },
     searchText() {
       //   this.$router.push({ name: 'search', params: { search } })
       this.$router.push({

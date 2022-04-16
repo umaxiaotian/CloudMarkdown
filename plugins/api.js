@@ -14,8 +14,7 @@ export default function ({ $axios }, inject) {
     //　　非会員向けAPI　 //
     ///////////////////////
 
-    async apiGet(url,params={}){
-        let header= {'Content-Type': 'application/json',}
+    async apiGet(url,header={},params={}){
         return await this.axios.$get(this.BaseUrl+url,{
             headers: header,
             params: params
