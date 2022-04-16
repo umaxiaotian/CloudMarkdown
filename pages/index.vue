@@ -5,12 +5,8 @@
         :color="$vuetify.breakpoint.smAndDown ? 'grey darken-1' : 'transparent'"
         size="32"
       ></v-avatar>
-      <v-tabs centered class="ml-n9" color="grey darken-1" v-model="model">
-        <v-tab   v-for="(link,index) in links" :key="index" :href="link.address" >
-          {{ link.title }}
-        </v-tab>
-      </v-tabs>
-      
+ 
+      <Header /> 
       <v-avatar
         class="hidden-sm-and-down"
         color="grey darken-1 shrink"
@@ -40,20 +36,22 @@
 <script>
 import MainBar from "@/components/MainBar";
 import ListView from "@/components/MainComponents/ListView.vue";
+import Header from "@/components/MainComponents/Header.vue";
 export default {
   components: {
     MainBar,
     ListView,
+    Header
   },
   data() {
     return {
       article_list: [],
-      model: '/',
+      model: this.$route.path,
       links: [
         {title: "TREND", address : "/"},
-        {title: "SEARCH", address : "search"},
-        {title: "Profile", address : "profile"},
-        {title: "ReleaseNote", address : "releasenote"},
+        {title: "SEARCH", address : "/search"},
+        {title: "Profile", address : "/profile"},
+        {title: "ReleaseNote", address : "/releasenote"},
       ],
 
     };

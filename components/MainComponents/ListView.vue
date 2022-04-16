@@ -1,50 +1,50 @@
 <template>
-  <!-- コンテンツ一覧 -->
-  <v-col cols="12" lg="8">
-    <div v-for="item in viewLists" :key="item.id">
-      <v-card class="mx-auto" color="grey darken-2" outlined>
-        <v-list-item three-line>
-          <v-list-item-content>
-            <div class="text-overline mb-4">
-              記事作者：{{ item.relate_user_name }}
-            </div>
-            <v-list-item-title class="text-h5 mb-1">
-              <nuxt-link
-                style="color: inherit; text-decoration: none"
-                to="/shop/register"
-                >{{ item.title }}</nuxt-link
-              >
-            </v-list-item-title>
-             <v-list-item-subtitle>{{ item.detail }}</v-list-item-subtitle>
-          </v-list-item-content>
-          <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
-        </v-list-item>
-        <div class="text-left">
-          <v-chip
-            class="ma-2"
-            color="primary"
-            v-for="tag in item.tags"
-            :key="tag.id"
-          >
-            {{ tag.tag_name }}
-          </v-chip>
-        </div>
-        <v-card-actions>
-          <v-btn rounded color="pink darken-3" dark>
-            {{ item.good_count }}
-            <v-icon dark right> mdi-heart </v-icon>
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-      <div class="mx-3 my-5" />
-    </div>
-    <v-pagination
-      v-model="page"
-      :length="length"
-      @input="pageChange"
-    ></v-pagination>
-    <!-- ここまで記事リスト -->
-  </v-col>
+<div>
+  <div v-for="item in viewLists" :key="item.id">
+    <v-card class="mx-auto" color="grey darken-2" outlined>
+      <v-list-item three-line>
+        <v-list-item-content>
+          <div class="text-overline mb-4">
+            記事作者：{{ item.relate_user_name }}
+          </div>
+          <v-list-item-title class="text-h5 mb-1">
+            <nuxt-link
+              style="color: inherit; text-decoration: none"
+              to="/shop/register"
+              >{{ item.title }}</nuxt-link
+            >
+          </v-list-item-title>
+          <v-list-item-subtitle>{{ item.detail }}</v-list-item-subtitle>
+        </v-list-item-content>
+        <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
+      </v-list-item>
+      <div class="text-left">
+        <v-chip
+          class="ma-2"
+          color="blue"
+          v-for="tag in item.tags"
+          :key="tag.id"
+        >
+          {{ tag.tag_name }}
+        </v-chip>
+      </div>
+      <v-card-actions>
+        <v-btn rounded color="pink" dark>
+          {{ item.good_count }}
+          <v-icon dark right> mdi-heart </v-icon>
+        </v-btn>
+      </v-card-actions>
+    </v-card>
+    <div class="mx-3 my-5" />
+  </div>
+  <v-pagination
+    v-model="page"
+    :length="length"
+    color="blue"
+    @input="pageChange"
+  ></v-pagination>
+</div>
+  <!-- ここまで記事リスト -->
 </template>
 
 <script>
