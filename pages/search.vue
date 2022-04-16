@@ -5,11 +5,12 @@
         :color="$vuetify.breakpoint.smAndDown ? 'grey darken-1' : 'transparent'"
         size="32"
       ></v-avatar>
-      <v-tabs centered class="ml-n9" color="grey darken-1">
-        <v-tab v-for="link in links" :key="link">
-          {{ link }}
+      <v-tabs centered class="ml-n9" color="grey darken-1" v-model="model">
+        <v-tab   v-for="(link,index) in links" :key="index" :href="link.address" >
+          {{ link.title }}
         </v-tab>
       </v-tabs>
+      
       <v-avatar
         class="hidden-sm-and-down"
         color="grey darken-1 shrink"
@@ -47,7 +48,14 @@ export default {
   data() {
     return {
       article_list: [],
-      links: ["TREND", "SEARCH", "Profile", "ReleaseNote"],
+      model: 'search',
+      links: [
+        {title: "TREND", address : "#"},
+        {title: "SEARCH", address : "#search"},
+        {title: "Profile", address : "#profile"},
+        {title: "ReleaseNote", address : "#releasenote"},
+      ],
+
     };
   },
   async created() {

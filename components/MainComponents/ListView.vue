@@ -15,6 +15,7 @@
                 >{{ item.title }}</nuxt-link
               >
             </v-list-item-title>
+             <v-list-item-subtitle>{{ item.detail }}</v-list-item-subtitle>
           </v-list-item-content>
           <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
         </v-list-item>
