@@ -15,7 +15,8 @@ module.exports = {
     '@/plugins/markdown-it',
     '@/plugins/axios',
     '@/plugins/api',
-    { src: '@/plugins/persistedstate.js', ssr: false}
+    { src: '@/plugins/persistedstate.js', ssr: false},
+    { src: '@/plugins/util.js' }
   ],
   buildModules: [
     '@nuxt/typescript-build'

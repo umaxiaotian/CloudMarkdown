@@ -67,17 +67,25 @@ export default {
         this.$store.commit("accessToken", login_result.access_token);
         this.$store.commit("refreshToken", login_result.refresh_token);
       } else {
-        console.log("はいって");
+        console.log("認証情報が入っている。");
+      }
+
+      //認証したら/へジャンプする。
+      const acsessToken = this.$store.getters.accessToken;
+      const refreshToken = this.$store.getters.refreshToken;
+      if (acsessToken && refreshToken) {
+        this.$router.push('/')
       }
     },
   },
   created() {
     this.$vuetify.theme.dark = true;
-    const acsessToken = this.$store.getters.accessToken;
-    const refreshToken =this.$store.getters.refreshToken;
 
+    //認証したら/へジャンプする。
+    const acsessToken = this.$store.getters.accessToken;
+    const refreshToken = this.$store.getters.refreshToken;
     if (acsessToken && refreshToken) {
-    console.log("INNNNN");
+      this.$router.push('/')
     }
   },
 };
