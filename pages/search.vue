@@ -50,10 +50,10 @@ export default {
       article_list: [],
       model: 'search',
       links: [
-        {title: "TREND", address : "#"},
-        {title: "SEARCH", address : "#search"},
-        {title: "Profile", address : "#profile"},
-        {title: "ReleaseNote", address : "#releasenote"},
+        {title: "TREND", address : "/"},
+        {title: "SEARCH", address : "search"},
+        {title: "Profile", address : "profile"},
+        {title: "ReleaseNote", address : "releasenote"},
       ],
 
     };
