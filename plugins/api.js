@@ -7,9 +7,13 @@ export default function ({ $axios }, inject) {
   class API {
     constructor (axios) {
       this.axios = axios
-    }
+    }   
     
     BaseUrl="http://localhost:8000";
+    ///////////////////////
+    //　　非会員向けAPI　 //
+    ///////////////////////
+
     async apiGet(url,params={}){
         let header= {'Content-Type': 'application/json',}
         return await this.axios.$get(this.BaseUrl+url,{
@@ -18,5 +22,14 @@ export default function ({ $axios }, inject) {
         })
         .catch(err => err.response || {noResponse:true})
     }
-    
+    async apiLogin(url,params={}){
+      var user_params = new URLSearchParams();
+      user_params.append('username', params.username);
+      user_params.append('password', params.password);
+      return await this.axios.$post(this.BaseUrl+url,user_params)
+      .catch(err => err.response || {noResponse:true})
+  }
+    ///////////////////////
+    //　認証会員向けAPI　 //
+    ///////////////////////
 }

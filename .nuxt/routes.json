@@ -1,5 +1,12 @@
 [
   {
+    "name": "login",
+    "path": "/login",
+    "component": "G:\\\\WORK\\\\Documents\\\\WORK\\\\CloudMD\\\\pages\\\\login.vue",
+    "chunkName": "pages/login",
+    "_name": "_5b6199fa"
+  },
+  {
     "name": "search",
     "path": "/search",
     "component": "G:\\\\WORK\\\\Documents\\\\WORK\\\\CloudMD\\\\pages\\\\search.vue",

@@ -18,7 +18,7 @@
     <v-btn icon @click="searchText()">
       <v-icon>mdi-magnify</v-icon>
     </v-btn>
-    <v-btn class="ma-2" color="blue"> ログイン </v-btn>
+    <v-btn class="ma-2" color="blue" href="/login"> ログイン </v-btn>
   </v-app-bar>
 </template>
 
@@ -32,8 +32,8 @@ export default {
       links: [
         { title: "TREND", address: "/" },
         { title: "SEARCH", address: "/search" },
-        { title: "Profile", address: "/profile" },
-        { title: "ReleaseNote", address: "/releasenote" },
+        { title: "TAGS", address: "/tags" },
+        { title: "MEMBER", address: "/member" },
       ],
     };
   },

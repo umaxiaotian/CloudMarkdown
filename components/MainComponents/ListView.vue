@@ -66,7 +66,7 @@ export default {
       length: 0,
       lists: [],
       viewLists: [],
-      pageSize: 3,
+      pageSize: 10,
     };
   },
   watch: {
