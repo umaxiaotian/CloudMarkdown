@@ -13,7 +13,7 @@ export default ({ app }, inject) => {
   md.use(MarkdownItMermaid, {
     startOnLoad: false,
     securityLevel: true,
-    theme: 'default',
+    theme: 'dark',
     flowchart: {
       htmlLabels: false,
       useMaxWidth: true

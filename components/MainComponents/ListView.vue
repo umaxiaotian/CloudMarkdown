@@ -10,7 +10,7 @@
           <v-list-item-title class="text-h5 mb-1">
             <nuxt-link
               style="color: inherit; text-decoration: none"
-              to="/shop/register"
+              :to="'/article?article_id='+item.id"
               >{{ item.title }}</nuxt-link
             >
           </v-list-item-title>
