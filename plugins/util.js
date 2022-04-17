@@ -19,8 +19,9 @@ class Util {
             return false
         }
     }
+
+    //セッション切れの際の自動ログイン
     async refreshTokenReLogin() {
-        // console.log( this._store.getters.refreshToken);
         const refreshToken = this._store.getters.refreshToken;
         const header = { 'Authorization': 'Bearer ' + refreshToken }
         const reLogin = await this.api.apiGet("/refresh_token/", header);
@@ -28,7 +29,7 @@ class Util {
         this._store.commit("accessToken", reLogin.access_token);
         this._store.commit("refreshToken", reLogin.refresh_token);
 
-        return reLogin
+        // return reLogin
     }
     async getUserName() {
 

@@ -55,7 +55,8 @@ export default {
         this.$router.push('/login')
     //    console.log(await this.$util.refreshTokenReLogin());
     },
-    logout(){
+    async logout(){
+        // console.log(await  this.$util.refreshTokenReLogin());
         this.$store.commit("accessToken", null);
         this.$store.commit("refreshToken", null);
           this.$router.push('/login')

@@ -56,6 +56,7 @@ export default {
   },
   methods: {
     async postLogin() {
+      //認証情報が入っていない時だけ実行
       if (
         !this.$store.getters.accessToken &&
         !this.$store.getters.refresh_token
@@ -64,17 +65,24 @@ export default {
           username: this.user,
           password: this.password,
         });
-        this.$store.commit("accessToken", login_result.access_token);
-        this.$store.commit("refreshToken", login_result.refresh_token);
-      } else {
-        console.log("認証情報が入っている。");
+
+        if (!login_result.data) {
+          this.$store.commit("accessToken", login_result.access_token);
+          this.$store.commit("refreshToken", login_result.refresh_token);
+        } else {
+          this.$swal.fire({
+            icon: "error",
+            title: "エラー",
+            text: login_result.data.detail,
+          });
+        }
       }
 
       //認証したら/へジャンプする。
       const acsessToken = this.$store.getters.accessToken;
       const refreshToken = this.$store.getters.refreshToken;
       if (acsessToken && refreshToken) {
-        this.$router.push('/')
+        this.$router.push("/");
       }
     },
   },
@@ -85,7 +93,7 @@ export default {
     const acsessToken = this.$store.getters.accessToken;
     const refreshToken = this.$store.getters.refreshToken;
     if (acsessToken && refreshToken) {
-      this.$router.push('/')
+      this.$router.push("/");
     }
   },
 };
