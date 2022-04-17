@@ -1,12 +1,12 @@
 <template>
   <v-app id="inspire">
-      <Header />
+    <Header />
+    <MainBar />
     <v-main class="grey darken-3">
       <v-container>
         <v-row>
-          <v-col cols="12" lg="2" >
+          <v-col cols="12" lg="2">
             <v-card>
-              
               <v-list flat color="grey darken-2 shrink">
                 <v-subheader>人気タグ</v-subheader>
                 <v-list-item-group>
@@ -58,7 +58,7 @@ export default {
   data() {
     return {
       article_list: [],
-      header_title:"人気順TOP10",
+      header_title: "人気順TOP10",
       items: [
         {
           avatar:

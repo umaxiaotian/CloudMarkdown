@@ -1,6 +1,7 @@
 <template>
   <v-app id="inspire">
     <Header />
+    <MainBar />
     <v-main class="grey darken-3">
       <v-container>
         <v-row>
@@ -67,26 +68,15 @@
                     <v-icon dark right> mdi-heart </v-icon>
                   </v-btn>
                 </v-card-actions>
-             
 
-
-
-   <MdViewr :markdown="article.detail" />
-
+                <MdViewr :markdown="article.detail" />
               </v-card>
-
             </div>
-
-            
           </v-col>
 
-
-          
           <v-col cols="12" lg="2">
             <v-sheet rounded="lg" min-height="300">
               <!--  -->
-
-              
             </v-sheet>
           </v-col>
         </v-row>
@@ -106,7 +96,7 @@ export default {
     MainBar,
     ListView,
     Header,
-    MdViewr
+    MdViewr,
   },
   data() {
     return {

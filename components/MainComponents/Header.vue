@@ -1,5 +1,6 @@
 <template>
   <v-app-bar app class="darken-4" flat>
+            <v-app-bar-icon></v-app-bar-icon>
     <v-tabs class="ml-n9" color="grey darken-1" v-model="model">
       <v-tab v-for="(link, index) in links" :key="index" :href="link.address">
         {{ link.title }}

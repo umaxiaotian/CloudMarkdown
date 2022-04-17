@@ -1,6 +1,7 @@
 <template>
   <v-app id="inspire">
     <Header />
+    <MainBar />
     <v-main class="grey darken-3">
       <v-container>
         <v-row>
@@ -106,7 +107,7 @@ export default {
 
   methods: {
     async search() {
-      console.log("検索ワード："+ this.search_result);
+      console.log("検索ワード：" + this.search_result);
 
       this.result_text = "検索結果:" + this.search_result;
       const article_list = await this.$api.apiGet("/article/list/");

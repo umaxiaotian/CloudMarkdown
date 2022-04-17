@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <Header />
     <MainBar />
     <v-main>
       <div style="display: flex; min-height: min-content">
@@ -19,6 +20,7 @@
 
 <script>
 import MainBar from "@/components/MainBar";
+import Header from "@/components/MainComponents/Header.vue";
 import Editor from "@/components/EditorComponents/Editor";
 import Toolbar from "@/components/EditorComponents/Toolbar";
 export default {
@@ -26,6 +28,7 @@ export default {
     Editor,
     Toolbar,
     MainBar,
+    Header,
   },
   data: () => ({
     isShowToolbar: true,
