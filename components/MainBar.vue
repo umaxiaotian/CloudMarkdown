@@ -26,7 +26,7 @@
         <div class="mb-5 d-flex justify-center align-center">
           <v-btn icon>
             <v-avatar :size="26">
-              <v-icon dark> mdi-unicode </v-icon>
+              <v-icon dark> mdi-account-cog </v-icon>
             </v-avatar>
           </v-btn>
         </div>

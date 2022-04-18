@@ -21,7 +21,8 @@
       <v-list flat color="grey darken-2 shrink">
         <v-subheader>人気タグ</v-subheader>
         <v-list-item-group>
-          <v-list-item v-for="(item, i) in tags" :key="i">
+          <v-list-item v-for="(item, i) in tags" :key="i" :href="'/tags?id=' + item.id">
+            
             <v-list-item-icon>
               <v-img max-height="30" max-width="30" :src="item.img"></v-img>
             </v-list-item-icon>
@@ -62,11 +63,11 @@ export default {
   },
   async created() {
     this.$vuetify.theme.dark = true;
+
+    const tags = await this.$api.apiGet("/article/tags/list");
+    this.tags = tags;
     const isLogin = await this.$util.isLogin();
     if (isLogin) {
-      const tags = await this.$api.apiGet("/article/tags/list");
-      this.tags = tags;
-
       const acsessToken = this.$store.getters.accessToken;
       const header = { Authorization: "Bearer " + acsessToken };
       const user = await this.$api.apiGet("/user/me/", header);

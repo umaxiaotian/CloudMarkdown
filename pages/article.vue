@@ -18,6 +18,9 @@
                     <div class="text-overline mb-4">
                       記事作者：{{ article.relate_user_name }}
                     </div>
+                     <div class="text-overline mb-4">
+                      投稿日：{{ article.post_date }}
+                    </div>
                     <v-list-item-title class="text-h5 mb-1">
                       {{ article.title }}
                     </v-list-item-title>
@@ -35,6 +38,7 @@
                     color="blue"
                     v-for="tag in article.tags"
                     :key="tag.id"
+                    :href="'/tags?id=' + article.id"
                   >
                     {{ tag.tag_name }}
                   </v-chip>
@@ -79,6 +83,11 @@ export default {
   data() {
     return {
       article: [],
+    };
+  },
+  head() {
+    return {
+      title: this.article.title,
     };
   },
   created() {
