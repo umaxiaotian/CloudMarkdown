@@ -18,6 +18,8 @@ class Util {
             const user = await this.api.apiGet("/user/me/", header);
             if (user.name) {
                 return true
+            }else{
+                this.refreshTokenReLogin();
             }
         } else {
             return false

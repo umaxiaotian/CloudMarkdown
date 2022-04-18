@@ -21,6 +21,7 @@ export default function ({ $axios }, inject) {
         })
         .catch(err => err.response || {noResponse:true})
     }
+
     async apiLogin(url,params={}){
       var user_params = new URLSearchParams();
       user_params.append('username', params.username);
@@ -28,7 +29,5 @@ export default function ({ $axios }, inject) {
       return await this.axios.$post(this.BaseUrl+url,user_params)
       .catch(err => err.response || {noResponse:true})
   }
-    ///////////////////////
-    //　認証会員向けAPI　 //
-    ///////////////////////
+   
 }
