@@ -38,7 +38,7 @@
                     color="blue"
                     v-for="tag in article.tags"
                     :key="tag.id"
-                    :href="'/tags?id=' + article.id"
+                    :href="'/tags?id=' + tag.id"
                   >
                     {{ tag.tag_name }}
                   </v-chip>
