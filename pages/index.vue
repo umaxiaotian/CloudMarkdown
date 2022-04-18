@@ -6,7 +6,8 @@
       <v-container>
         <v-row>
           <v-col cols="12" lg="2">
-            <v-card >
+            <div class="toc-view">
+            <v-card elevation-12>
               <v-list flat color="grey darken-2 shrink">
                 <v-subheader>人気タグ</v-subheader>
                 
@@ -29,6 +30,7 @@
                 </v-list-item-group>
               </v-list>
             </v-card>
+            </div>
           </v-col>
           <!-- コンテンツ一覧 -->
           <v-col cols="12" lg="8">
@@ -45,7 +47,12 @@
     </v-main>
   </v-app>
 </template>
-
+<style scoped>
+.toc-view {
+  position: sticky;
+  top: 5rem;
+}
+</style>
 <script>
 import MainBar from "@/components/MainBar";
 import ListView from "@/components/MainComponents/ListView.vue";

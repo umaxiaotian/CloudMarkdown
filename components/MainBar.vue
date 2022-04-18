@@ -1,10 +1,8 @@
 <template>
   <div v-if="isLogin">
     <v-navigation-drawer
-      v-model="drawer"
       mini-variant
       app
-      :class="appBarColor"
       class="darken-4"
       permanent
       disable-route-watcher
