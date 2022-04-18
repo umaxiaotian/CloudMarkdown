@@ -42,8 +42,8 @@ export default {
       isLogin: false,
     };
   },
-  created() {
-    this.isLogin = this.$util.isLogin();
+  async created() {
+    this.isLogin =await this.$util.isLogin();
   },
 };
 </script>
