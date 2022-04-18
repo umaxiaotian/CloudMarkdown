@@ -21,6 +21,13 @@
     "_name": "_5143bee7"
   },
   {
+    "name": "tags",
+    "path": "/tags",
+    "component": "G:\\\\WORK\\\\Documents\\\\WORK\\\\CloudMD\\\\pages\\\\tags.vue",
+    "chunkName": "pages/tags",
+    "_name": "_3ccd6a98"
+  },
+  {
     "name": "user-editor",
     "path": "/user/editor",
     "component": "G:\\\\WORK\\\\Documents\\\\WORK\\\\CloudMD\\\\pages\\\\user\\\\editor.vue",

@@ -7,6 +7,7 @@ import scrollBehavior from './router.scrollBehavior.js'
 const _2abdaec7 = () => interopDefault(import('..\\pages\\article.vue' /* webpackChunkName: "pages/article" */))
 const _5b6199fa = () => interopDefault(import('..\\pages\\login.vue' /* webpackChunkName: "pages/login" */))
 const _5143bee7 = () => interopDefault(import('..\\pages\\search.vue' /* webpackChunkName: "pages/search" */))
+const _3ccd6a98 = () => interopDefault(import('..\\pages\\tags.vue' /* webpackChunkName: "pages/tags" */))
 const _7f1d1492 = () => interopDefault(import('..\\pages\\user\\editor.vue' /* webpackChunkName: "pages/user/editor" */))
 const _dc8c123a = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
 
@@ -33,6 +34,10 @@ export const routerOptions = {
     path: "/search",
     component: _5143bee7,
     name: "search"
+  }, {
+    path: "/tags",
+    component: _3ccd6a98,
+    name: "tags"
   }, {
     path: "/user/editor",
     component: _7f1d1492,
