@@ -9,12 +9,18 @@ class Util {
         this._store = store
     }
 
-    //共通処理
-    isLogin() {
+    //ログイン中か確認する
+    async isLogin() {
         const acsessToken = this._store.getters.accessToken;
         const refreshToken = this._store.getters.refreshToken;
         if (acsessToken && refreshToken) {
-            return true
+            const header = { 'Authorization': 'Bearer ' + acsessToken }
+            const user = await this.api.apiGet("/user/me/", header);
+            if (user) {
+                return true
+            } else {
+                return false
+            }
         } else {
             return false
         }
@@ -25,7 +31,7 @@ class Util {
         const refreshToken = this._store.getters.refreshToken;
         const header = { 'Authorization': 'Bearer ' + refreshToken }
         const reLogin = await this.api.apiGet("/refresh_token/", header);
-   
+
         this._store.commit("accessToken", reLogin.access_token);
         this._store.commit("refreshToken", reLogin.refresh_token);
 

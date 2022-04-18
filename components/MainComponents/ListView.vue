@@ -1,7 +1,7 @@
 <template>
 <div>
   <div v-for="item in viewLists" :key="item.id">
-    <v-card class="mx-auto" color="grey darken-2" outlined>
+    <v-card class="mx-auto elevation-12" color="grey darken-2" outlined>
       <v-list-item three-line>
         <v-list-item-content>
           <div class="text-overline mb-4">

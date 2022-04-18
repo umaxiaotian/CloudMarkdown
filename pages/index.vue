@@ -6,9 +6,10 @@
       <v-container>
         <v-row>
           <v-col cols="12" lg="2">
-            <v-card>
+            <v-card >
               <v-list flat color="grey darken-2 shrink">
                 <v-subheader>人気タグ</v-subheader>
+                
                 <v-list-item-group>
                   <v-list-item v-for="(item, i) in items" :key="i">
                     <v-list-item-icon>
