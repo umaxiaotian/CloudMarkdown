@@ -54,6 +54,11 @@ export default {
       password: "",
     };
   },
+  head() {
+    return {
+      title: "ログイン",
+    };
+  },
   methods: {
     async postLogin() {
       //認証情報が入っていない時だけ実行

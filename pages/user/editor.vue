@@ -51,11 +51,6 @@ export default {
       { label: "Dashboard", color: "blue", due_count: 1 },
     ],
   }),
-  head() {
-    return {
-      title: "CloudMarkdown",
-    };
-  },
   created() {
     this.$vuetify.theme.dark = true;
   },

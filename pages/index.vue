@@ -44,7 +44,12 @@ export default {
   data() {
     return {
       article_list: [],
-      header_title:"人気順TOP10"
+      header_title: "人気順TOP10",
+    };
+  },
+  head() {
+    return {
+      title: "トレンド",
     };
   },
   async created() {

@@ -3,30 +3,35 @@
     "name": "article",
     "path": "/article",
     "component": "G:\\\\WORK\\\\Documents\\\\WORK\\\\CloudMD\\\\pages\\\\article.vue",
-    "chunkName": "pages/article"
+    "chunkName": "pages/article",
+    "_name": "_2abdaec7"
   },
   {
     "name": "login",
     "path": "/login",
     "component": "G:\\\\WORK\\\\Documents\\\\WORK\\\\CloudMD\\\\pages\\\\login.vue",
-    "chunkName": "pages/login"
+    "chunkName": "pages/login",
+    "_name": "_5b6199fa"
   },
   {
     "name": "search",
     "path": "/search",
     "component": "G:\\\\WORK\\\\Documents\\\\WORK\\\\CloudMD\\\\pages\\\\search.vue",
-    "chunkName": "pages/search"
+    "chunkName": "pages/search",
+    "_name": "_5143bee7"
   },
   {
     "name": "user-editor",
     "path": "/user/editor",
     "component": "G:\\\\WORK\\\\Documents\\\\WORK\\\\CloudMD\\\\pages\\\\user\\\\editor.vue",
-    "chunkName": "pages/user/editor"
+    "chunkName": "pages/user/editor",
+    "_name": "_7f1d1492"
   },
   {
     "name": "index",
     "path": "/",
     "component": "G:\\\\WORK\\\\Documents\\\\WORK\\\\CloudMD\\\\pages\\\\index.vue",
-    "chunkName": "pages/index"
+    "chunkName": "pages/index",
+    "_name": "_dc8c123a"
   }
 ]

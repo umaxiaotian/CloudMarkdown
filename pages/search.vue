@@ -46,6 +46,11 @@ export default {
       result_text: "検索結果がありませんでした。",
     };
   },
+    head() {
+    return {
+      title: "検索結果：" + this.search_result,
+    };
+  },
   watch: {
     //当子コンポーネントからのパラムGET
     $route(param) {

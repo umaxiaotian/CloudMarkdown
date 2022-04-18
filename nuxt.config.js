@@ -7,7 +7,7 @@ module.exports = {
   ssr: false,
   target: 'static',
   head: {
-    title: 'EngPit CMS',
+    title: 'CloudMarkdown',
     meta: [{ charset: 'utf-8' }]
   },
   loading: false,
