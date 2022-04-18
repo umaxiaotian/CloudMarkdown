@@ -39,7 +39,7 @@ class Util {
     }
     async getUserName() {
 
-        const status = this.isLogin()
+        const status = await this.isLogin()
         if (status) {
             const acsessToken = this._store.getters.accessToken;
             const header = { 'Authorization': 'Bearer ' + acsessToken }

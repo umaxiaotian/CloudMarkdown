@@ -4,18 +4,16 @@
       <v-list v-if="isShow">
         <v-list-item class="px-2">
           <v-list-item-avatar>
-            <v-img
-              :src=user.avater
-            ></v-img>
+            <v-img :src="user.avater"></v-img>
           </v-list-item-avatar>
         </v-list-item>
 
         <v-list-item link>
           <v-list-item-content>
             <v-list-item-title class="text-h6">
-              {{user.nickname}}
+              {{ user.nickname }}
             </v-list-item-title>
-            <v-list-item-subtitle>{{user.email}}</v-list-item-subtitle>
+            <v-list-item-subtitle>{{ user.email }}</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -59,20 +57,22 @@ export default {
     return {
       tags: [],
       user: [],
-      isShow:false
+      isShow: false,
     };
   },
   async created() {
     this.$vuetify.theme.dark = true;
+    const isLogin = await this.$util.isLogin();
+    if (isLogin) {
+      const tags = await this.$api.apiGet("/article/tags/list");
+      this.tags = tags;
 
-    const tags = await this.$api.apiGet("/article/tags/list");
-    this.tags = tags;
-
-    const acsessToken = this.$store.getters.accessToken;
-    const header = { Authorization: "Bearer " + acsessToken };
-    const user = await this.$api.apiGet("/user/me/", header);
-    this.isShow= await this.$util.isLogin();
-    this.user = user;
+      const acsessToken = this.$store.getters.accessToken;
+      const header = { Authorization: "Bearer " + acsessToken };
+      const user = await this.$api.apiGet("/user/me/", header);
+      this.isShow = await this.$util.isLogin();
+      this.user = user;
+    }
   },
 
   methods: {},
