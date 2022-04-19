@@ -33,9 +33,6 @@ module.exports = {
   axios: {
     proxy: true,
   },
-  proxy: {
-    '/api/': 'http://localhost:8000',
-  },
   server: {
     port: 8080, // デフォルト: 3000
     host: '0.0.0.0' // デフォルト: localhost
