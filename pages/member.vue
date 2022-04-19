@@ -70,7 +70,7 @@ export default {
     if (this.member_id) {
       this.search();
     }
-    this.user_info.nickname= "ななし"
+    this.user_info.nickname= "名無し"
   },
 
   methods: {

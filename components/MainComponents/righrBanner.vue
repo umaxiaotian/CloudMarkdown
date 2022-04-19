@@ -46,7 +46,7 @@ export default {
     };
   },
   async created() {
-    this.notice = await this.$api.apiGet("/notice/list");
+    this.notice = await this.$api.apiGet("/notice/list/");
   },
 
   methods: {

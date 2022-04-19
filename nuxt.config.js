@@ -10,12 +10,16 @@ module.exports = {
     title: 'CloudMarkdown',
     meta: [{ charset: 'utf-8' }]
   },
+  env: {
+    //APIの向き先
+    baseUrl: process.env.BASE_URL || 'http://localhost:8000',
+  },
   loading: false,
   plugins: [
     '@/plugins/markdown-it',
     '@/plugins/axios',
     '@/plugins/api',
-    { src: '@/plugins/persistedstate.js', ssr: false},
+    { src: '@/plugins/persistedstate.js', ssr: false },
     { src: '@/plugins/util.js' }
   ],
   buildModules: [
@@ -29,8 +33,12 @@ module.exports = {
   axios: {
     proxy: true,
   },
+  proxy: {
+    '/api/': 'http://localhost:8000',
+  },
   server: {
-    port: 8080
+    port: 8080, // デフォルト: 3000
+    host: '0.0.0.0' // デフォルト: localhost
   },
   vuetify: {
     theme: {

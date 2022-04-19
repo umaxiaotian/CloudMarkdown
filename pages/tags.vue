@@ -70,6 +70,7 @@ export default {
     if (this.search_tag_id) {
       this.search();
     }
+    this.tag_info.tag_name = "なし";
   },
 
   methods: {

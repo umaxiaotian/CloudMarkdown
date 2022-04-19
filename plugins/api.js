@@ -9,7 +9,7 @@ export default function ({ $axios }, inject) {
       this.axios = axios
     }   
     
-    BaseUrl="http://localhost:8000";
+    BaseUrl=process.env.baseUrl;
     ///////////////////////
     //　　非会員向けAPI　 //
     ///////////////////////
