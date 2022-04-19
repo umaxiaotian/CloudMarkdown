@@ -1,14 +1,13 @@
-export default function ({ $api, store, $swal, $router }, inject) {
-    const util = new Util($api, store, $swal, $router)
+export default function ({ $api, store, $swal,  }, inject) {
+    const util = new Util($api, store, $swal, )
     inject('util', util)
 }
 // import store from '@/store/index.js';
 class Util {
-    constructor(api, store, swal, router) {
+    constructor(api, store, swal) {
         this.api = api
         this._store = store
         this.swal = swal
-        this.router = router
     }
 
     //共通処理

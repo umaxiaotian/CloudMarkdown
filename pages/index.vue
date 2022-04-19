@@ -14,9 +14,7 @@
             <ListView :articles="article_list" />
           </v-col>
           <v-col cols="12" lg="2">
-            <v-sheet rounded="lg" min-height="300">
-              <!--  -->
-            </v-sheet>
+            <righrBanner />
           </v-col>
         </v-row>
       </v-container>
@@ -34,12 +32,14 @@ import MainBar from "@/components/MainBar";
 import ListView from "@/components/MainComponents/ListView.vue";
 import Header from "@/components/MainComponents/Header.vue";
 import LeftBanner from "@/components/MainComponents/LeftBanner.vue";
+import righrBanner from "@/components/MainComponents/righrBanner.vue";
 export default {
   components: {
     MainBar,
     ListView,
     Header,
     LeftBanner,
+    righrBanner,
   },
   data() {
     return {

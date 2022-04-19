@@ -62,8 +62,6 @@ export default {
     };
   },
   async created() {
-    this.$vuetify.theme.dark = true;
-
     const tags = await this.$api.apiGet("/article/tags/list");
     this.tags = tags;
     const isLogin = await this.$util.isLogin();

@@ -35,28 +35,29 @@ export default {
     ListView,
     Header,
     LeftBanner,
-    righrBanner,
+    righrBanner
   },
   data() {
     return {
       article_list: [],
       model: this.$route.path,
       is_search: true,
-      search_result: null,
-      result_text: "検索結果がありませんでした。",
+      user_info: [],
+      member_id: null,
+      result_text: "メンバーが選択されていません",
     };
   },
   head() {
     return {
-      title: "検索結果：" + this.search_result,
+      title: this.user_info.nickname+"の記事",
     };
   },
   watch: {
     //当子コンポーネントからのパラムGET
     $route(param) {
-      console.log(param.query.searchText);
-      if (param.query.searchText) {
-        this.search_result = param.query.searchText;
+      console.log(param.query.id);
+      if (param.query.id) {
+        this.member_id = param.query.id;
         this.search();
       }
     },
@@ -65,21 +66,26 @@ export default {
     this.$vuetify.theme.dark = true;
 
     //外部から来た人向けのサーチパラムGET
-    this.search_result = this.$route.query.searchText;
-    if (this.search_result) {
+    this.member_id = this.$route.query.id;
+    if (this.member_id) {
       this.search();
     }
+    this.user_info.nickname= "ななし"
   },
 
   methods: {
     async search() {
-      console.log("検索ワード：" + this.search_result);
-
-      this.result_text = "検索結果:" + this.search_result;
       const article_list = await this.$api.apiGet(
-        "/article/search/" + this.search_result
+        "/article/user/" + this.member_id
       );
       this.article_list = article_list;
+
+      const member = await this.$api.apiGet(
+        "/member/user/" + this.member_id
+      );
+
+      this.user_info = member;
+      this.result_text = this.user_info.nickname+"の記事一覧";
     },
   },
 };

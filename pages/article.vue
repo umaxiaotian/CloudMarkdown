@@ -16,9 +16,15 @@
                 <v-list-item three-line>
                   <v-list-item-content>
                     <div class="text-overline mb-4">
-                      記事作者：{{ article.relate_user_name }}
+                      <h3>
+                        <a
+                          style="text-decoration: none; color: white"
+                          :href="'/member?id=' + article.relate_user_id"
+                          >記事作者：{{ article.relate_user_name }}</a
+                        >
+                      </h3>
                     </div>
-                     <div class="text-overline mb-4">
+                    <div class="text-overline mb-4">
                       投稿日：{{ article.post_date }}
                     </div>
                     <v-list-item-title class="text-h5 mb-1">
@@ -56,9 +62,7 @@
           </v-col>
 
           <v-col cols="12" lg="2">
-            <v-sheet rounded="lg" min-height="300">
-              <!--  -->
-            </v-sheet>
+            <righrBanner />
           </v-col>
         </v-row>
       </v-container>
@@ -72,6 +76,7 @@ import ListView from "@/components/MainComponents/ListView.vue";
 import Header from "@/components/MainComponents/Header.vue";
 import MdViewr from "@/components/MainComponents/MdViewr.vue";
 import LeftBanner from "@/components/MainComponents/LeftBanner.vue";
+import righrBanner from "@/components/MainComponents/righrBanner.vue";
 export default {
   components: {
     MainBar,
@@ -79,6 +84,7 @@ export default {
     Header,
     MdViewr,
     LeftBanner,
+    righrBanner,
   },
   data() {
     return {

@@ -4,8 +4,8 @@
       <v-card class="mx-auto elevation-12" color="grey darken-2" outlined>
         <v-list-item three-line>
           <v-list-item-content>
-            <div class="text-overline mb-4">
-              記事作者：{{ item.relate_user_name }}
+            <div class="text-overline mb-3" >
+              <h3><a style="text-decoration: none; color:white;" :href="'/member?id=' + item.relate_user_id">記事作者：{{ item.relate_user_name }}</a></h3>
             </div>
             <div class="text-overline mb-4">
               投稿日：{{ item.post_date }}
