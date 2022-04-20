@@ -21,7 +21,7 @@
             <v-list-item-title class="text-h5 mb-1">
               <nuxt-link
                 style="color: inherit; text-decoration: none"
-                :to="'/user/article detail?article_id=' + item.id"
+                :to="'/user/article_detail?article_id=' + item.id"
                 >{{ item.title }}</nuxt-link
               >
             </v-list-item-title>
@@ -64,8 +64,14 @@
               icon
               :to="'/user/editor?id=' + item.id"
             >
-              <v-avatar color="red" size="44">
+              <v-avatar color="pink" size="44">
                 <v-icon dark> mdi-web-cancel </v-icon>
+              </v-avatar>
+            </v-btn>
+             <v-avatar size="26" />
+            <v-btn icon  v-if="item.is_publish == false">
+              <v-avatar color="red darken-1" size="56">
+                <v-icon dark> mdi-delete </v-icon>
               </v-avatar>
             </v-btn>
             <v-avatar size="26" />

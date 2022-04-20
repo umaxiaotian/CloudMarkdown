@@ -32,24 +32,8 @@ export default {
   },
   data: () => ({
     isShowToolbar: true,
-    drawer: true,
-    appBarColor: "grey",
-    appBarTitle: "Tasks",
-    appBarIcon: "mdi-lightbulb",
-    isSearching: false,
-    links: [
-      { label: "Inbox", icon: "mdi-inbox", color: "background" },
-      {
-        label: "Planned",
-        icon: "mdi-clock-outline",
-        color: "background",
-      },
-    ],
-    projects: [
-      { label: "Accounting", color: "cyan", due_count: 1 },
-      { label: "Secret Game", color: "green" },
-      { label: "Dashboard", color: "blue", due_count: 1 },
-    ],
+ 
+
   }),
   created() {
     this.$vuetify.theme.dark = true;
@@ -66,9 +50,7 @@ export default {
 };
 </script>
 <style >
-/* ::-webkit-scrollbar {
-    display: none;
-} */
+
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;

@@ -25,10 +25,7 @@
   </v-app>
 </template>
 <style scoped>
-.toc-view {
-  position: sticky;
-  top: 5rem;
-}
+
 </style>
 <script>
 import MainBar from "@/components/MainBar";
