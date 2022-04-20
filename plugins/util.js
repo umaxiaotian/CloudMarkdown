@@ -68,4 +68,22 @@ class Util {
             return user
         }
     }
+
+    //ログイン中のみ使用可能なGET
+    async authGet(url,params={}) {
+
+        const status = await this.isLogin()
+        if (status) {
+            const acsessToken = this._store.getters.accessToken;
+            const header = { 'Authorization': 'Bearer ' + acsessToken }
+            const result = await this.api.apiGet(url, header);
+           
+            return result
+        }
+    }
+
+
+
+
+
 }

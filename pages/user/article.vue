@@ -10,11 +10,11 @@
           </v-col>
           <!-- コンテンツ一覧 -->
           <v-col cols="12" lg="8">
-            <v-icon large color="orange darken-2">
-              mdi-arrow-up-bold-box-outline
+             <v-icon large color="blue darken-2">
+              mdi-card-account-details-outline
             </v-icon>
-            <h1 v-text="header_title"></h1>
-            <ListView :articles="article_list" />
+            <h1 v-text="result_text"></h1>
+            <UserListView :articles="article_list" />
           </v-col>
           <v-col cols="12" lg="2">
             <righrBanner />
@@ -24,22 +24,17 @@
     </v-main>
   </v-app>
 </template>
-<style scoped>
-.toc-view {
-  position: sticky;
-  top: 5rem;
-}
-</style>
+
 <script>
 import MainBar from "@/components/MainBar";
-import ListView from "@/components/MainComponents/ListView.vue";
+import UserListView from "~/components/UserComponents/UserListView.vue";
 import Header from "@/components/MainComponents/Header.vue";
 import LeftBanner from "@/components/MainComponents/LeftBanner.vue";
 import righrBanner from "@/components/MainComponents/righrBanner.vue";
 export default {
   components: {
     MainBar,
-    ListView,
+    UserListView,
     Header,
     LeftBanner,
     righrBanner,
@@ -47,21 +42,21 @@ export default {
   data() {
     return {
       article_list: [],
-      header_title: "人気順TOP10",
+      result_text: "自分の記事リスト一覧（最新順）",
     };
   },
   head() {
     return {
-      title: "トレンド",
+      title: "自分の記事一覧",
     };
   },
   async created() {
     this.$vuetify.theme.dark = true;
-
-    const article_list = await this.$api.apiGet("/article/list/");
-    this.article_list = article_list;
+    if(await this.$util.isLogin()){
+    this.article_list = await this.$util.authGet("/user/article/list/");
+    }else{
+       this.$router.push('/')
+    }
   },
-
-  methods: {},
 };
 </script>

@@ -11,6 +11,7 @@
 
           <!-- コンテンツ一覧 -->
           <v-col cols="12" lg="8">
+            <v-icon large color="pink"> mdi-account-tie </v-icon>
             <h1 v-if="is_search" v-text="result_text"></h1>
             <ListView :articles="article_list" />
           </v-col>
@@ -35,7 +36,7 @@ export default {
     ListView,
     Header,
     LeftBanner,
-    righrBanner
+    righrBanner,
   },
   data() {
     return {
@@ -49,7 +50,7 @@ export default {
   },
   head() {
     return {
-      title: this.user_info.nickname+"の記事",
+      title: this.user_info.nickname + "の記事",
     };
   },
   watch: {
@@ -70,7 +71,7 @@ export default {
     if (this.member_id) {
       this.search();
     }
-    this.user_info.nickname= "名無し"
+    this.user_info.nickname = "名無し";
   },
 
   methods: {
@@ -80,12 +81,10 @@ export default {
       );
       this.article_list = article_list;
 
-      const member = await this.$api.apiGet(
-        "/member/user/" + this.member_id
-      );
+      const member = await this.$api.apiGet("/member/user/" + this.member_id);
 
       this.user_info = member;
-      this.result_text = this.user_info.nickname+"の記事一覧";
+      this.result_text = this.user_info.nickname + "の記事一覧";
     },
   },
 };

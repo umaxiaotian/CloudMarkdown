@@ -11,6 +11,9 @@
 
           <!-- コンテンツ一覧 -->
           <v-col cols="12" lg="8">
+            <v-icon large color="blue darken-2">
+              mdi-file-search-outline
+            </v-icon>
             <h1 v-if="is_search" v-text="result_text"></h1>
             <ListView :articles="article_list" />
           </v-col>
