@@ -4,14 +4,14 @@
     <MainBar />
     <v-main>
       <div style="display: flex; min-height: min-content">
-        <div style="height: 100vh; overflow: auto">
+        <div style="height: 100%; overflow: auto">
           <Toolbar v-if="isShowToolbar" />
         </div>
         <div
           id="main-content"
-          style="height: 100vh; width: 100%; overflow: auto"
+          style="height: 100%; width: 100%; overflow: auto"
         >
-          <Editor />
+          <Editor :article_detail="article_detail" />
         </div>
       </div>
     </v-main>
@@ -32,13 +32,35 @@ export default {
   },
   data: () => ({
     isShowToolbar: true,
- 
-
+    article: [],
+    article_detail: null,
+    article_id: null,
   }),
-  created() {
+  async created() {
     this.$vuetify.theme.dark = true;
+
+    //外部から来た人向けのサーチパラムGET
+    this.article_id = this.$route.query.id;
+    if (this.article_id) {
+      this.getArticle();
+    }
   },
+
   methods: {
+    async getArticle() {
+      if (await this.$util.isLogin()) {
+        this.article = await this.$util.authGet(
+          "/user/article/" + this.article_id
+        );
+        this.article_detail = this.article.detail;
+        // console.log(this.article_id);
+        if (this.article.is_publish) {
+          this.$router.push("/");
+        }
+      } else {
+        this.$router.push("/");
+      }
+    },
     clickToolBar() {
       if (this.isShowToolbar == false) {
         this.isShowToolbar = true;
@@ -49,30 +71,3 @@ export default {
   },
 };
 </script>
-<style >
-
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: linear-gradient(rgb(211, 211, 211), rgb(211, 211, 211));
-}
-
-::-webkit-scrollbar-thumb {
-  background: #7c7c7c;
-  border-radius: 5px;
-}
-
-html {
-  overflow: hidden !important;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-html::-webkit-scrollbar {
-  width: 0;
-  height: 0;
-}
-</style>

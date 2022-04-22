@@ -59,25 +59,31 @@
                 <v-icon dark> mdi-cloud-upload </v-icon>
               </v-avatar>
             </v-btn>
-            <v-btn
-              v-if="item.is_publish == true"
-              icon
-              :to="'/user/editor?id=' + item.id"
-            >
-              <v-avatar color="pink" size="44">
-                <v-icon dark> mdi-web-cancel </v-icon>
-              </v-avatar>
-            </v-btn>
-             <v-avatar size="26" />
-            <v-btn icon  v-if="item.is_publish == false">
+
+            <v-avatar size="26" />
+            <v-btn icon v-if="item.is_publish == false">
               <v-avatar color="red darken-1" size="56">
                 <v-icon dark> mdi-delete </v-icon>
               </v-avatar>
             </v-btn>
             <v-avatar size="26" />
-            <v-btn icon :to="'/user/editor?id=' + item.id">
+            <v-btn
+              icon
+              v-if="item.is_publish == false"
+              :to="'/user/editor?id=' + item.id"
+            >
               <v-avatar color="blue darken-1" size="56">
                 <v-icon dark> mdi-draw </v-icon>
+              </v-avatar>
+            </v-btn>
+
+            <v-btn
+              v-if="item.is_publish == true"
+              icon
+              :to="'/user/editor?id=' + item.id"
+            >
+              <v-avatar color="pink" size="56">
+                <v-icon dark> mdi-web-cancel </v-icon>
               </v-avatar>
             </v-btn>
           </v-row>

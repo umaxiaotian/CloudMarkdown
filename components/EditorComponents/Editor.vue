@@ -56,10 +56,19 @@ export default {
       return this.$store.getters.markdownText;
     },
   },
+   props: {
+    article_detail: {
+      type: String,
+      default: "",
+    },
+  },
   watch: {
     markdownText(val) {
       this.inputEditor(val);
     },
+    article_detail(val){
+      this.inputEditor(val);
+    }
   },
   mounted() {
     //   this.$store.commit('markdownText',  this.markdown)
