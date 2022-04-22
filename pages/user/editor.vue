@@ -3,13 +3,14 @@
     <Header />
     <MainBar />
     <v-main>
+      
       <div style="display: flex; min-height: min-content">
-        <div style="height: 100%; overflow: auto">
+        <div style="height: 100vh; overflow: auto">
           <Toolbar v-if="isShowToolbar" />
         </div>
         <div
           id="main-content"
-          style="height: 100%; width: 100%; overflow: auto"
+          style="height: 100vh; width: 100%; overflow: auto"
         >
           <Editor :article_detail="article_detail" />
         </div>
@@ -17,6 +18,8 @@
     </v-main>
   </v-app>
 </template>
+
+
 
 <script>
 import MainBar from "@/components/MainBar";

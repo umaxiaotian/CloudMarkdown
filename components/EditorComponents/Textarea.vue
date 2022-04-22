@@ -201,8 +201,7 @@ export default {
   background: #565656;
   color: #fff;
 }
-</style>
-<style>
+
 html,
 body {
   margin: 0;
