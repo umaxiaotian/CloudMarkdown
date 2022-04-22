@@ -3,10 +3,13 @@
     <!-- <Header /> -->
     <MainBar />
     <v-main>
-      
       <div style="display: flex; min-height: min-content">
         <div style="height: 100vh; overflow: auto">
-          <Toolbar v-if="isShowToolbar" :article_detail="article" />
+          <Toolbar
+            v-if="isShowToolbar"
+            :article_detail="article"
+            :tags_all="tags_all"
+          />
         </div>
         <div
           id="main-content"
@@ -37,10 +40,12 @@ export default {
     isShowToolbar: true,
     article: [],
     article_id: null,
+    tags_all: [],
   }),
   async created() {
     this.$vuetify.theme.dark = true;
 
+    this.tags_all = await this.$api.apiGet("/article/tags/list_all");
     //外部から来た人向けのサーチパラムGET
     this.article_id = this.$route.query.id;
     if (this.article_id) {
@@ -54,7 +59,7 @@ export default {
         this.article = await this.$util.authGet(
           "/user/article/" + this.article_id
         );
-        // console.log(this.article_id);
+
         if (this.article.is_publish) {
           this.$router.push("/");
         }

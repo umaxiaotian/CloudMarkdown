@@ -30,6 +30,7 @@
   top: 5rem;
 }
 </style>
+
 <script>
 import MainBar from "@/components/MainBar";
 import ListView from "@/components/MainComponents/ListView.vue";
@@ -51,7 +52,8 @@ export default {
 
   methods: {
     showModal(item) {
-      console.log(item);
+      var BaseUrl = process.env.baseUrl;
+      console.log(BaseUrl);
       this.$swal.fire({
         title: item.title,
 
@@ -61,7 +63,7 @@ export default {
 
         backdrop: `
     rgba(0,0,123,0.4)
-    url(" https://harublog.site/wp-content/uploads/2020/03/IMG_2819.gif")
+    url("`+BaseUrl+`/extraResource/IMG_2819.gif")
     left top
     no-repeat
   `,

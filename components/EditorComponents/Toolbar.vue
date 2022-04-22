@@ -30,6 +30,30 @@
       :value="article_detail.title"
     />
     <v-list subheader two-line>
+      <v-subheader>関連タグ</v-subheader>
+      <v-combobox
+        v-model="chips"
+        :items="obj"
+        chips
+        clearable
+        multiple
+        background-color="blue"
+        solo
+      >
+        <template v-slot:selection="{ attrs, item, select, selected }">
+          <v-chip
+            v-bind="attrs"
+            :input-value="selected"
+            close
+            @click="select"
+            @click:close="remove(item)"
+          >
+            <strong>{{ item }}</strong
+            >&nbsp;
+          </v-chip>
+        </template>
+      </v-combobox>
+
       <v-subheader>構文リスト</v-subheader>
 
       <v-list-group
@@ -94,18 +118,40 @@ export default {
         this.$store.commit("markdownText", beforeNode + insertNode + afterNode);
       }
     },
+    remove(item) {
+      this.chips.splice(this.chips.indexOf(item), 1);
+      this.chips = [...this.chips];
+    },
   },
   props: {
     article_detail: {
       default: [],
     },
+    tags_all: {
+      default: [],
+    },
   },
   watch: {
     article_detail(val) {
-      console.log(val);
+      const select_tags = [];
+      const tags = val.tags;
+      tags.forEach((element) => {
+        select_tags.push(element.tag_name);
+      });
+      this.chips = select_tags;
+    },
+    tags_all(val) {
+      const tags_all = [];
+      val.forEach((element) => {
+        tags_all.push(element.tag_name);
+      });
+
+      this.obj = tags_all;
     },
   },
   data: () => ({
+    chips: [],
+    obj: [],
     items: [
       {
         action: "mdi-ab-testing",
