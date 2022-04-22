@@ -61,7 +61,7 @@ export default {
   async created() {
     this.isLogin = await this.$util.isLogin();
 
-//現在の選択されている位置を取得する
+    //現在の選択されている位置を取得する
     const path = this.$route.path;
     this.items.forEach((element, index) => {
       if (element.link == path) {

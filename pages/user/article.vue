@@ -17,7 +17,7 @@
             <UserListView :articles="article_list" />
           </v-col>
           <v-col cols="12" lg="2">
-            <righrBanner />
+            <RighrBanner />
           </v-col>
         </v-row>
       </v-container>
@@ -30,14 +30,14 @@ import MainBar from "@/components/MainBar";
 import UserListView from "~/components/UserComponents/UserListView.vue";
 import Header from "@/components/MainComponents/Header.vue";
 import LeftBanner from "@/components/MainComponents/LeftBanner.vue";
-import righrBanner from "@/components/MainComponents/righrBanner.vue";
+import RighrBanner from "@/components/MainComponents/RighrBanner.vue";
 export default {
   components: {
     MainBar,
     UserListView,
     Header,
     LeftBanner,
-    righrBanner,
+    RighrBanner,
   },
   data() {
     return {

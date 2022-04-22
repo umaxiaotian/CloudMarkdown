@@ -53,7 +53,7 @@
             <v-btn
               v-if="item.is_publish == false"
               icon
-              :to="'/user/editor?id=' + item.id"
+              :href="'/user/editor?id=' + item.id"
             >
               <v-avatar color="orange darken-1" size="56">
                 <v-icon dark> mdi-cloud-upload </v-icon>
@@ -70,7 +70,7 @@
             <v-btn
               icon
               v-if="item.is_publish == false"
-              :to="'/user/editor?id=' + item.id"
+              :href="'/user/editor?id=' + item.id"
             >
               <v-avatar color="blue darken-1" size="56">
                 <v-icon dark> mdi-draw </v-icon>
@@ -80,7 +80,7 @@
             <v-btn
               v-if="item.is_publish == true"
               icon
-              :to="'/user/editor?id=' + item.id"
+              :href="'/user/editor?id=' + item.id"
             >
               <v-avatar color="pink" size="56">
                 <v-icon dark> mdi-web-cancel </v-icon>

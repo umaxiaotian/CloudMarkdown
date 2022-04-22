@@ -1,6 +1,6 @@
 
 <template>
-  <v-app>
+  <v-app > 
     <splitpanes
       class="default-theme"
       style="height: 100%"
@@ -31,7 +31,12 @@
     </splitpanes>
   </v-app>
 </template>
-
+<style >
+html::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+</style>>
 <script>
 import { Splitpanes, Pane } from "splitpanes";
 import "splitpanes/dist/splitpanes.css";
@@ -58,8 +63,7 @@ export default {
   },
    props: {
     article_detail: {
-      type: String,
-      default: "",
+      default: [],
     },
   },
   watch: {
@@ -67,7 +71,7 @@ export default {
       this.inputEditor(val);
     },
     article_detail(val){
-      this.inputEditor(val);
+      this.inputEditor(val.detail);
     }
   },
   mounted() {

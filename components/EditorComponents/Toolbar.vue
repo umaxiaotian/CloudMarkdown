@@ -12,28 +12,23 @@
       :extended="isSearching"
       style="position: sticky; top: 0; z-index: 1; margin-right: 1px"
     >
-      <v-toolbar-title> 補助ツールバー </v-toolbar-title>
+      <v-toolbar-title> ツールバー </v-toolbar-title>
       <v-spacer />
-      <!-- <v-btn icon @click="isSearching = !isSearching">
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
-      <template v-if="isSearching" #extension>
-        <v-text-field
-          autofocus
-          style="margin-bottom: -25px"
-          class="mr-2"
-          prepend-inner-icon="mdi-magnify"
-          clearable
-          rounded
-          filled
-          solo
-          flat
-          dense
-          placeholder="構文検索"
-          @keydown.esc="isSearching = false"
-        />
-      </template> -->
     </v-toolbar>
+    <v-text-field
+      autofocus
+      style="margin-bottom: -25px"
+      class="mr-2"
+      prepend-inner-icon="mdi-file-document-edit"
+      clearable
+      rounded
+      filled
+      solo
+      flat
+      dense
+      placeholder="タイトル"
+      :value="article_detail.title"
+    />
     <v-list subheader two-line>
       <v-subheader>構文リスト</v-subheader>
 
@@ -100,11 +95,21 @@ export default {
       }
     },
   },
+  props: {
+    article_detail: {
+      default: [],
+    },
+  },
+  watch: {
+    article_detail(val) {
+      console.log(val);
+    },
+  },
   data: () => ({
     items: [
       {
         action: "mdi-ab-testing",
-        active: true,
+        // active: true,
         items: [
           { title: "大見出し(h1)", handle: "LeftAdd", mdTextHead: "#" },
           { title: "大見出し(h2)", handle: "LeftAdd", mdTextHead: "##" },
@@ -166,7 +171,8 @@ export default {
           {
             title: "表（テーブル 2x2）",
             handle: "LeftAdd",
-            mdTextHead: "\n\n|  TH  |  TH  |\n| ---- | ---- |\n|  TD  |  TD  |\n|  TD  |  TD  |\n\n",
+            mdTextHead:
+              "\n\n|  TH  |  TH  |\n| ---- | ---- |\n|  TD  |  TD  |\n|  TD  |  TD  |\n\n",
           },
         ],
         title: "挿入",

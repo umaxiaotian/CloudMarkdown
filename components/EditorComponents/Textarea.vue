@@ -194,25 +194,6 @@ export default {
 .theme--dark.v-application {
   color: black;
 }
-.scroll {
-  /* width: 100vh; */
-  height: 100vh;
-  overflow: auto;
-  background: #565656;
-  color: #fff;
-}
-
-html,
-body {
-  margin: 0;
-  padding: 0;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  font-family: lucida console, courier new, courier, monospace;
-  font-size: 1rem;
-  font-weight: 400;
-}
 
 #codeEditor,
 #lineCounter {

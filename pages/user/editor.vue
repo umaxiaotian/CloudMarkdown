@@ -1,18 +1,18 @@
 <template>
   <v-app>
-    <Header />
+    <!-- <Header /> -->
     <MainBar />
     <v-main>
       
       <div style="display: flex; min-height: min-content">
         <div style="height: 100vh; overflow: auto">
-          <Toolbar v-if="isShowToolbar" />
+          <Toolbar v-if="isShowToolbar" :article_detail="article" />
         </div>
         <div
           id="main-content"
           style="height: 100vh; width: 100%; overflow: auto"
         >
-          <Editor :article_detail="article_detail" />
+          <Editor :article_detail="article" />
         </div>
       </div>
     </v-main>
@@ -36,7 +36,6 @@ export default {
   data: () => ({
     isShowToolbar: true,
     article: [],
-    article_detail: null,
     article_id: null,
   }),
   async created() {
@@ -55,7 +54,6 @@ export default {
         this.article = await this.$util.authGet(
           "/user/article/" + this.article_id
         );
-        this.article_detail = this.article.detail;
         // console.log(this.article_id);
         if (this.article.is_publish) {
           this.$router.push("/");
