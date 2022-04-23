@@ -175,7 +175,7 @@ export default {
   data: () => ({
     chips: [],
     obj: [],
-    current: "",
+    current: [],
 
     items: [
       {
