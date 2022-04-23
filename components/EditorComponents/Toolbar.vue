@@ -81,20 +81,19 @@
             <v-list-item-title v-text="item.title"></v-list-item-title>
           </v-list-item-content>
         </template>
-        <v-dialog v-model="dialog" max-width="500">
+        <v-dialog v-model="dialog"  v-if="dialog" max-width="500">
           <v-card>
             <v-card-title class="text-h5">
               追加する画像を選択してください。
             </v-card-title>
-
             <v-file-input
               label="画像の選択"
               accept="image/*"
               prepend-icon="mdi-image"
-              :value="article_img"
               @change="onUploadArticleImg"
-            ></v-file-input>
+            ></v-file-input> 
           </v-card>
+        
         </v-dialog>
 
         <v-list-item
@@ -119,7 +118,8 @@ export default {
       console.log(e);
     },
     async onUploadArticleImg(item) {
-      if (item.name) {
+
+      if (item && item.name || item && item.length != 0) {
         let params = new FormData();
         params.append("upload_file", item);
         const result = await this.$util.authPostImg("/uploadfile/", params);
@@ -127,8 +127,6 @@ export default {
         //現在の設定をリセット
         const BaseUrl = process.env.baseUrl+ "/extraResource/" ;
         this.editText('LeftAdd','![画像]('+BaseUrl+result.filename+')\n' )
-        this.article_img = [];
-
       // this.article_img.value=null;
       }
       this.dialog = false;
@@ -214,7 +212,7 @@ export default {
     chips: [],
     obj: [],
     current: [],
-    article_img: [],
+
     dialog: false,
     items: [
       {
