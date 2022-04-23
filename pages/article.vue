@@ -34,7 +34,8 @@
                     <!-- mdviewr -->
                   </v-list-item-content>
                   <v-list-item-avatar tile size="80" color="grey"
-                    ><img :src="article.img | changeImgPath"
+                    >
+                    <img :src="article.img | changeImgPath"
                   /></v-list-item-avatar>
                 </v-list-item>
 
@@ -98,9 +99,11 @@ export default {
   },
     filters: {
     changeImgPath(img) {
-      // 11文字目以降は"…"
+      
+      if(img){
       var BaseUrl = process.env.baseUrl;
       return BaseUrl + "/extraResource/" + img;
+      }
     },
   },
   created() {

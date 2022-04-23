@@ -15,10 +15,16 @@
               <v-card class="mx-auto" color="grey darken-2" outlined>
                 <v-card-actions>
                   <v-row align="center">
-                    <v-card v-if="article.is_publish == true" color="green darken-1">
+                    <v-card
+                      v-if="article.is_publish == true"
+                      color="green darken-1"
+                    >
                       <h2>公開コンテンツ</h2>
                     </v-card>
-                      <v-card v-if="article.is_publish == false" color="orange darken-1">
+                    <v-card
+                      v-if="article.is_publish == false"
+                      color="orange darken-1"
+                    >
                       <h2>非公開コンテンツ</h2>
                     </v-card>
                   </v-row>
@@ -106,11 +112,12 @@ export default {
       title: this.article.title,
     };
   },
-    filters: {
+  filters: {
     changeImgPath(img) {
-      // 11文字目以降は"…"
+     if(img){
       var BaseUrl = process.env.baseUrl;
       return BaseUrl + "/extraResource/" + img;
+     }
     },
   },
   created() {
@@ -129,7 +136,6 @@ export default {
         this.article = await this.$util.authGet(
           "/user/article/" + this.article_id
         );
-        console.log(this.article_id);
       } else {
         this.$router.push("/");
       }

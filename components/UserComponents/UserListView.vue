@@ -136,7 +136,7 @@ export default {
   },
   filters: {
     changeImgPath(img) {
-      // 11文字目以降は"…"
+      
       var BaseUrl = process.env.baseUrl;
       return BaseUrl + "/extraResource/" + img;
     },
