@@ -81,6 +81,21 @@
             <v-list-item-title v-text="item.title"></v-list-item-title>
           </v-list-item-content>
         </template>
+        <v-dialog v-model="dialog" max-width="500">
+          <v-card>
+            <v-card-title class="text-h5">
+              追加する画像を選択してください。
+            </v-card-title>
+
+            <v-file-input
+              label="画像の選択"
+              accept="image/*"
+              prepend-icon="mdi-image"
+              :value="article_img"
+              @change="onUploadArticleImg"
+            ></v-file-input>
+          </v-card>
+        </v-dialog>
 
         <v-list-item
           v-for="child in item.items"
@@ -103,6 +118,21 @@ export default {
     onImageUploaded(e) {
       console.log(e);
     },
+    async onUploadArticleImg(item) {
+      if (item.name) {
+        let params = new FormData();
+        params.append("upload_file", item);
+        const result = await this.$util.authPostImg("/uploadfile/", params);
+        console.log(result);
+        //現在の設定をリセット
+        const BaseUrl = process.env.baseUrl+ "/extraResource/" ;
+        this.editText('LeftAdd','![画像]('+BaseUrl+result.filename+')\n' )
+        this.article_img = [];
+
+      // this.article_img.value=null;
+      }
+      this.dialog = false;
+    },
 
     //左側に文字を追加するアクション
     editText(handle, mdTextHead, mdTextTail) {
@@ -110,6 +140,14 @@ export default {
       var pos_start = editorDefine.selectionStart;
       var pos_end = editorDefine.selectionEnd;
       var val = editorDefine.value;
+
+      if (handle == "addPicture") {
+        if (this.dialog == false) {
+          this.dialog = true;
+        } else {
+          this.dialog = false;
+        }
+      }
 
       if (handle == "LeftAdd") {
         var headLine = 0;
@@ -176,7 +214,8 @@ export default {
     chips: [],
     obj: [],
     current: [],
-
+    article_img: [],
+    dialog: false,
     items: [
       {
         action: "mdi-ab-testing",
@@ -245,7 +284,13 @@ export default {
             mdTextHead:
               "\n\n|  TH  |  TH  |\n| ---- | ---- |\n|  TD  |  TD  |\n|  TD  |  TD  |\n\n",
           },
+          {
+            title: "画像追加",
+            handle: "addPicture",
+            mdTextHead: null,
+          },
         ],
+
         title: "挿入",
       },
     ],
@@ -266,18 +311,6 @@ export default {
       { label: "Accounting", color: "cyan", due_count: 1 },
       { label: "Secret Game", color: "green" },
       { label: "Dashboard", color: "blue", due_count: 1 },
-    ],
-    issues: [
-      {
-        title: "テーブル",
-        order: 1,
-        description: "表機能を追加します。デフォルトでは4x4",
-      },
-      {
-        title: "画像挿入",
-        order: 2,
-        description: "画像挿入タグを挿入します。",
-      },
     ],
   }),
 };

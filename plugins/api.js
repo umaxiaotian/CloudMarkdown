@@ -14,14 +14,19 @@ export default function ({ $axios }, inject) {
     //　　非会員向けAPI　 //
     ///////////////////////
 
-    async apiGet(url,header={},params={}){
-        return await this.axios.$get(this.BaseUrl+url,{
-            headers: header,
-            params: params
-        })
+    async apiPost(url,header = {},params={}){
+        return await this.axios.$post(this.BaseUrl+url,params,
+          {headers:header})
         .catch(err => err.response || {noResponse:true})
     }
-
+  
+    async apiGet(url,header={},params={}){
+      return await this.axios.$get(this.BaseUrl+url,{
+          headers: header,
+          params: params
+      })
+      .catch(err => err.response || {noResponse:true})
+  }
     async apiLogin(url,params={}){
       var user_params = new URLSearchParams();
       user_params.append('username', params.username);

@@ -76,18 +76,24 @@ class Util {
         if (status) {
             const acsessToken = this._store.getters.accessToken;
             const header = { 'Authorization': 'Bearer ' + acsessToken }
-            const result = await this.api.apiGet(url, header);
+            const result = await this.api.apiGet(url, header,params);
            
             return result
         }
     }
 
-    //ExtraResourceのファイルパスを取得
-    getExtraResource(item) {
-    var BaseUrl = process.env.baseUrl;
-      return BaseUrl+"/extraResource/"+item
+     //ログイン中のみ使用可能なGET
+     async authPostImg(url,params={}) {
+
+        const status = await this.isLogin()
+        if (status) {
+            const acsessToken = this._store.getters.accessToken;
+            const header = { 'Authorization': 'Bearer ' + acsessToken }
+            const result = await this.api.apiPost(url,header ,params);
+           
+            return result
+        }
     }
-    
      
 
 
