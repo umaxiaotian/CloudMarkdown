@@ -28,7 +28,7 @@
             <v-list-item-subtitle>{{ item.detail }}</v-list-item-subtitle>
           </v-list-item-content>
           <v-list-item-avatar tile size="80" color="grey">
-            <img :src="item.img"
+            <img :src="item.img | changeImgPath"
           /></v-list-item-avatar>
         </v-list-item>
         <div class="text-left">
@@ -43,7 +43,7 @@
           </v-chip>
         </div>
         <v-card-actions>
-          <v-btn rounded color="pink" dark>
+          <v-btn rounded color="pink" dark disabled>
             {{ item.good_count }}
             <v-icon dark right> mdi-heart </v-icon>
           </v-btn>
@@ -134,6 +134,14 @@ export default {
       this.viewLists = lists.slice(0, this.pageSize);
     },
   },
+  filters: {
+    changeImgPath(img) {
+      // 11文字目以降は"…"
+      var BaseUrl = process.env.baseUrl;
+      return BaseUrl + "/extraResource/" + img;
+    },
+  },
+
   async created() {
     this.$vuetify.theme.dark = true;
   },

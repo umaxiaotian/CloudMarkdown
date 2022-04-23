@@ -14,9 +14,7 @@
           </v-avatar>
         </v-btn>
       </div>
-
       <v-divider class="mx-3 my-5" />
-
       <v-list>
         <v-list-item-group v-model="model">
           <v-list-item v-for="(item, i) in items" :key="i" :href="item.link">
@@ -29,7 +27,6 @@
           </v-list-item>
         </v-list-item-group>
       </v-list>
-
       <template #append>
         <div class="mb-5 d-flex justify-center align-center">
           <v-btn icon>
@@ -42,7 +39,6 @@
     </v-navigation-drawer>
   </div>
 </template>
-
 <script>
 export default {
   data() {

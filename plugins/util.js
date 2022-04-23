@@ -82,6 +82,14 @@ class Util {
         }
     }
 
+    //ExtraResourceのファイルパスを取得
+    getExtraResource(item) {
+    var BaseUrl = process.env.baseUrl;
+      return BaseUrl+"/extraResource/"+item
+    }
+    
+     
+
 
 
 

@@ -22,8 +22,6 @@
   </v-app>
 </template>
 
-
-
 <script>
 import MainBar from "@/components/MainBar";
 import Header from "@/components/MainComponents/Header.vue";

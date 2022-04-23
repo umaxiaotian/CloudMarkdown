@@ -44,7 +44,7 @@
                     <!-- mdviewr -->
                   </v-list-item-content>
                   <v-list-item-avatar tile size="80" color="grey"
-                    ><img :src="article.img"
+                    ><img :src="article.img | changeImgPath"
                   /></v-list-item-avatar>
                 </v-list-item>
 
@@ -72,7 +72,7 @@
           </v-col>
 
           <v-col cols="12" lg="2">
-            <RighrBanner />
+            <RightBanner />
           </v-col>
         </v-row>
       </v-container>
@@ -86,7 +86,7 @@ import ListView from "@/components/MainComponents/ListView.vue";
 import Header from "@/components/MainComponents/Header.vue";
 import MdViewr from "@/components/MainComponents/MdViewr.vue";
 import LeftBanner from "@/components/MainComponents/LeftBanner.vue";
-import RighrBanner from "@/components/MainComponents/RighrBanner.vue";
+import RightBanner from "@/components/MainComponents/RightBanner.vue";
 export default {
   components: {
     MainBar,
@@ -94,7 +94,7 @@ export default {
     Header,
     MdViewr,
     LeftBanner,
-    RighrBanner,
+    RightBanner,
   },
   data() {
     return {
@@ -105,6 +105,13 @@ export default {
     return {
       title: this.article.title,
     };
+  },
+    filters: {
+    changeImgPath(img) {
+      // 11文字目以降は"…"
+      var BaseUrl = process.env.baseUrl;
+      return BaseUrl + "/extraResource/" + img;
+    },
   },
   created() {
     this.$vuetify.theme.dark = true;

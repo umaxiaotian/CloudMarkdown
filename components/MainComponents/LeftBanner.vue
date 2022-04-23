@@ -4,7 +4,7 @@
       <v-list v-if="isShow">
         <v-list-item class="px-2">
           <v-list-item-avatar>
-            <v-img :src="user.avater"></v-img>
+            <v-img :src="user.avater | changeImgPath"></v-img>
           </v-list-item-avatar>
         </v-list-item>
 
@@ -24,7 +24,7 @@
           <v-list-item v-for="(item, i) in tags" :key="i" :href="'/tags?id=' + item.id">
             
             <v-list-item-icon>
-              <v-img max-height="30" max-width="30" :src="item.img"></v-img>
+              <v-img max-height="30" max-width="30" :src="item.img | changeImgPath"></v-img>
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title v-text="item.tag_name"></v-list-item-title>
@@ -60,6 +60,13 @@ export default {
       user: [],
       isShow: false,
     };
+  },
+    filters: {
+    changeImgPath(img) {
+      // 11文字目以降は"…"
+      var BaseUrl = process.env.baseUrl;
+      return BaseUrl + "/extraResource/" + img;
+    },
   },
   async created() {
     const tags = await this.$api.apiGet("/article/tags/list");

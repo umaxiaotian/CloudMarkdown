@@ -4,12 +4,16 @@
       <v-card class="mx-auto elevation-12" color="grey darken-2" outlined>
         <v-list-item three-line>
           <v-list-item-content>
-            <div class="text-overline mb-3" >
-              <h3><a style="text-decoration: none; color:white;" :href="'/member?id=' + item.relate_user_id">記事作者：{{ item.relate_user_name }}</a></h3>
+            <div class="text-overline mb-3">
+              <h3>
+                <a
+                  style="text-decoration: none; color: white"
+                  :href="'/member?id=' + item.relate_user_id"
+                  >記事作者：{{ item.relate_user_name }}</a
+                >
+              </h3>
             </div>
-            <div class="text-overline mb-4">
-              投稿日：{{ item.post_date }}
-            </div>
+            <div class="text-overline mb-4">投稿日：{{ item.post_date }}</div>
             <v-list-item-title class="text-h5 mb-1">
               <nuxt-link
                 style="color: inherit; text-decoration: none"
@@ -20,7 +24,7 @@
             <v-list-item-subtitle>{{ item.detail }}</v-list-item-subtitle>
           </v-list-item-content>
           <v-list-item-avatar tile size="80" color="grey">
-            <img :src="item.img"
+            <img :src="item.img | changeImgPath"
           /></v-list-item-avatar>
         </v-list-item>
         <div class="text-left">
@@ -86,6 +90,15 @@ export default {
       this.viewLists = lists.slice(0, this.pageSize);
     },
   },
+
+  filters: {
+    changeImgPath(img) {
+      // 11文字目以降は"…"
+      var BaseUrl = process.env.baseUrl;
+      return BaseUrl + "/extraResource/" + img;
+    },
+  },
+
   async created() {
     this.$vuetify.theme.dark = true;
   },

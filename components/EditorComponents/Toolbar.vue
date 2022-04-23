@@ -12,6 +12,9 @@
       :extended="isSearching"
       style="position: sticky; top: 0; z-index: 1; margin-right: 1px"
     >
+      <v-btn class="ma-2" text icon color="blue">
+        <v-icon>mdi-content-save</v-icon>
+      </v-btn>
       <v-toolbar-title> ツールバー </v-toolbar-title>
       <v-spacer />
     </v-toolbar>
@@ -30,6 +33,16 @@
       :value="article_detail.title"
     />
     <v-list subheader two-line>
+      <v-subheader>記事の画像</v-subheader>
+
+      <v-file-input
+        label="記事トップの画像"
+        accept="image/*"
+        prepend-icon="mdi-image"
+        :value="current"
+        @change="onImageUploaded"
+      ></v-file-input>
+
       <v-subheader>関連タグ</v-subheader>
       <v-combobox
         v-model="chips"
@@ -87,6 +100,10 @@
 export default {
   components: {},
   methods: {
+    onImageUploaded(e) {
+      console.log(e);
+    },
+
     //左側に文字を追加するアクション
     editText(handle, mdTextHead, mdTextTail) {
       var editorDefine = this.$store.state.editorDefineData;
@@ -132,6 +149,7 @@ export default {
     },
   },
   watch: {
+    //記事内容のタグを配列に追加
     article_detail(val) {
       const select_tags = [];
       const tags = val.tags;
@@ -139,7 +157,12 @@ export default {
         select_tags.push(element.tag_name);
       });
       this.chips = select_tags;
+
+      this.current = new File(["image"], this.article_detail.img, {
+        type: "text/plain",
+      });
     },
+    //ユーザーが選択できるタグ配列を導入
     tags_all(val) {
       const tags_all = [];
       val.forEach((element) => {
@@ -152,6 +175,8 @@ export default {
   data: () => ({
     chips: [],
     obj: [],
+    current: "",
+
     items: [
       {
         action: "mdi-ab-testing",
