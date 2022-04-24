@@ -9,6 +9,7 @@
             v-if="isShowToolbar"
             :article_detail="article"
             :tags_all="tags_all"
+            @save="saveArticle"
           />
         </div>
         <div
@@ -52,6 +53,12 @@ export default {
   },
 
   methods: {
+    saveArticle(title,filename,selection_tag,define_editor_text){
+          console.log(title);
+        console.log(filename);
+        console.log(selection_tag);
+        console.log(define_editor_text);
+    },
     async getArticle() {
       if (await this.$util.isLogin()) {
         this.article = await this.$util.authGet(

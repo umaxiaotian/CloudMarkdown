@@ -12,7 +12,7 @@
       :extended="isSearching"
       style="position: sticky; top: 0; z-index: 1; margin-right: 1px"
     >
-      <v-btn class="ma-2" text icon color="blue">
+      <v-btn class="ma-2" text icon color="blue" @click="save()">
         <v-icon>mdi-content-save</v-icon>
       </v-btn>
       <v-toolbar-title> ツールバー </v-toolbar-title>
@@ -31,6 +31,7 @@
       dense
       placeholder="タイトル"
       :value="article_detail.title"
+      @change="titleChange"
     />
     <v-list subheader two-line>
       <v-subheader>記事の画像</v-subheader>
@@ -39,15 +40,15 @@
         label="記事トップの画像"
         accept="image/*"
         prepend-icon="mdi-image"
-        :value="current"
+        :value="current_article_img"
         @change="onImageUploaded"
       ></v-file-input>
 
       <v-subheader>関連タグ</v-subheader>
       <v-combobox
-        v-model="chips"
-        :items="obj"
-        chips
+        v-model="selection_tag"
+        :items="tags_all_list"
+        selection_tag
         clearable
         multiple
         background-color="blue"
@@ -81,7 +82,7 @@
             <v-list-item-title v-text="item.title"></v-list-item-title>
           </v-list-item-content>
         </template>
-        <v-dialog v-model="dialog"  v-if="dialog" max-width="500">
+        <v-dialog v-model="dialog" v-if="dialog" max-width="500">
           <v-card>
             <v-card-title class="text-h5">
               追加する画像を選択してください。
@@ -91,9 +92,8 @@
               accept="image/*"
               prepend-icon="mdi-image"
               @change="onUploadArticleImg"
-            ></v-file-input> 
+            ></v-file-input>
           </v-card>
-        
         </v-dialog>
 
         <v-list-item
@@ -114,26 +114,73 @@
 export default {
   components: {},
   methods: {
-    onImageUploaded(e) {
-      console.log(e);
+    //記事を保存する。
+    async save() {
+      if (this.article_detail.title) {
+        //post候補
+        var filename = null;
+        var selection_tag = null;
+        var define_editor_text = null;
+        var title = this.article_detail.title;
+
+        if (this.article_img && this.article_img.length != 0) {
+          // console.log(this.article_img);
+          let params = new FormData();
+          params.append("upload_file", this.article_img);
+          const file = await this.$util.authPostImg("/uploadfile/", params);
+          filename = file.filename;
+        }
+
+        if (this.selection_tag && this.selection_tag.length != 0) {
+          selection_tag = this.selection_tag;
+        }
+
+        const editorDefine = this.$store.state.editorDefineData;
+        if (editorDefine.value) {
+          define_editor_text = editorDefine.value;
+        }
+
+        // console.log(title);
+        // console.log(filename);
+        // console.log(selection_tag);
+        // console.log(define_editor_text);
+        this.$emit("save", title,filename,selection_tag,define_editor_text);
+
+      } else {
+        this.$swal.fire({
+          icon: "error",
+          title: "バリデーションエラー",
+          text: "タイトルは必ず入力してください！！",
+        });
+      }
     },
+    onImageUploaded(item) {
+      this.article_img = item;
+    },
+
+    //タイトルに変更があったっ場合に実行
+    titleChange(val) {
+      this.article_detail.title = val;
+      console.log(this.article_detail.title);
+    },
+
+    //画像追加時の処理
     async onUploadArticleImg(item) {
 
-      if (item && item.name || item && item.length != 0) {
+      if ((item && item.name) || (item && item.length != 0)) {
         let params = new FormData();
         params.append("upload_file", item);
         const result = await this.$util.authPostImg("/uploadfile/", params);
-        console.log(result);
-        //現在の設定をリセット
-        const BaseUrl = process.env.baseUrl+ "/extraResource/" ;
-        this.editText('LeftAdd','![画像]('+BaseUrl+result.filename+')\n' )
-      // this.article_img.value=null;
+        const BaseUrl = process.env.baseUrl + "/extraResource/";
+        this.editText( "LeftAdd","![画像](" + BaseUrl + result.filename + ")\n");
       }
+      //自滅
       this.dialog = false;
     },
 
     //左側に文字を追加するアクション
     editText(handle, mdTextHead, mdTextTail) {
+      // console.log(mdTextHead)
       var editorDefine = this.$store.state.editorDefineData;
       var pos_start = editorDefine.selectionStart;
       var pos_end = editorDefine.selectionEnd;
@@ -160,7 +207,7 @@ export default {
 
         var beforeNode = val.slice(0, headLine);
         var afterNode = val.slice(headLine);
-        var insertNode = mdTextHead + " ";
+        var insertNode = mdTextHead ;
         this.$store.commit("markdownText", beforeNode + insertNode + afterNode);
       }
       if (handle == "Center") {
@@ -172,8 +219,8 @@ export default {
       }
     },
     remove(item) {
-      this.chips.splice(this.chips.indexOf(item), 1);
-      this.chips = [...this.chips];
+      this.selection_tag.splice(this.selection_tag.indexOf(item), 1);
+      this.selection_tag = [...this.selection_tag];
     },
   },
   props: {
@@ -192,9 +239,9 @@ export default {
       tags.forEach((element) => {
         select_tags.push(element.tag_name);
       });
-      this.chips = select_tags;
+      this.selection_tag = select_tags;
 
-      this.current = new File(["image"], this.article_detail.img, {
+      this.current_article_img = new File(["image"], this.article_detail.img, {
         type: "text/plain",
       });
     },
@@ -205,14 +252,14 @@ export default {
         tags_all.push(element.tag_name);
       });
 
-      this.obj = tags_all;
+      this.tags_all_list = tags_all;
     },
   },
   data: () => ({
-    chips: [],
-    obj: [],
-    current: [],
-
+    selection_tag: [],
+    tags_all_list: [],
+    current_article_img: [],
+    article_img: [],
     dialog: false,
     items: [
       {
