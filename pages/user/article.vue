@@ -53,7 +53,12 @@ export default {
   async created() {
     this.$vuetify.theme.dark = true;
     if(await this.$util.isLogin()){
-    this.article_list = await this.$util.authGet("/user/article/list/");
+    const article_list = await this.$util.authGet("/user/article/list/");
+   if(article_list && article_list.noResponse != true){
+    this.article_list = article_list;
+    }
+
+
     }else{
        this.$router.push('/')
     }

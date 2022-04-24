@@ -83,7 +83,7 @@ class Util {
     }
 
      //ログイン中のみ使用可能なGET
-     async authPostImg(url,params={}) {
+     async authPost(url,params={}) {
 
         const status = await this.isLogin()
         if (status) {

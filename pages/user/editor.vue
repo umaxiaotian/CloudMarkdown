@@ -46,21 +46,34 @@ export default {
 
     this.tags_all = await this.$api.apiGet("/article/tags/list_all");
     //外部から来た人向けのサーチパラムGET
-    this.article_id = this.$route.query.id;
-    if (this.article_id) {
-      this.getArticle();
-    }
+ 
+      this.getArticleID();
+      await this.getArticle();
+    
   },
 
   methods: {
-    saveArticle(title,filename,selection_tag,define_editor_text){
-          console.log(title);
-        console.log(filename);
-        console.log(selection_tag);
-        console.log(define_editor_text);
+    getArticleID(){
+   this.article_id = this.$route.query.id;
+    },
+    async saveArticle(title, filename, selection_tag, define_editor_text) {
+      let params = new FormData();
+      params.append("title", title);
+      params.append("filename", filename);
+      params.append("selection_tag", JSON.stringify(selection_tag));
+      params.append("define_editor_text", define_editor_text);
+
+      if(!this.article_id){
+      const article_id = await this.$util.authPost("/post_article/", params);
+      this.article_id = article_id;
+      this.$router.push("/user/editor?id="+article_id);
+
+      }else{
+        console.log("ID_INNN")
+      }
     },
     async getArticle() {
-      if (await this.$util.isLogin()) {
+      if (await this.$util.isLogin() && this.article_id) {
         this.article = await this.$util.authGet(
           "/user/article/" + this.article_id
         );
@@ -68,8 +81,6 @@ export default {
         if (this.article.is_publish) {
           this.$router.push("/");
         }
-      } else {
-        this.$router.push("/");
       }
     },
     clickToolBar() {

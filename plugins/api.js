@@ -15,6 +15,7 @@ export default function ({ $axios }, inject) {
     ///////////////////////
 
     async apiPost(url,header = {},params={}){
+      console.log(params)
         return await this.axios.$post(this.BaseUrl+url,params,
           {headers:header})
         .catch(err => err.response || {noResponse:true})

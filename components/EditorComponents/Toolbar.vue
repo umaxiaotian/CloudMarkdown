@@ -127,7 +127,7 @@ export default {
           // console.log(this.article_img);
           let params = new FormData();
           params.append("upload_file", this.article_img);
-          const file = await this.$util.authPostImg("/uploadfile/", params);
+          const file = await this.$util.authPost("/uploadfile/", params);
           filename = file.filename;
         }
 
@@ -161,7 +161,6 @@ export default {
     //タイトルに変更があったっ場合に実行
     titleChange(val) {
       this.article_detail.title = val;
-      console.log(this.article_detail.title);
     },
 
     //画像追加時の処理
@@ -170,7 +169,7 @@ export default {
       if ((item && item.name) || (item && item.length != 0)) {
         let params = new FormData();
         params.append("upload_file", item);
-        const result = await this.$util.authPostImg("/uploadfile/", params);
+        const result = await this.$util.authPost("/uploadfile/", params);
         const BaseUrl = process.env.baseUrl + "/extraResource/";
         this.editText( "LeftAdd","![画像](" + BaseUrl + result.filename + ")\n");
       }
@@ -207,7 +206,7 @@ export default {
 
         var beforeNode = val.slice(0, headLine);
         var afterNode = val.slice(headLine);
-        var insertNode = mdTextHead ;
+        var insertNode = mdTextHead + " " ;
         this.$store.commit("markdownText", beforeNode + insertNode + afterNode);
       }
       if (handle == "Center") {
