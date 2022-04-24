@@ -20,7 +20,12 @@ export default function ({ $axios }, inject) {
           {headers:header})
         .catch(err => err.response || {noResponse:true})
     }
-  
+    async apiPut(url,header = {},params={}){
+      console.log(params)
+        return await this.axios.$put(this.BaseUrl+url,params,
+          {headers:header})
+        .catch(err => err.response || {noResponse:true})
+    }
     async apiGet(url,header={},params={}){
       return await this.axios.$get(this.BaseUrl+url,{
           headers: header,

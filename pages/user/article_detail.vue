@@ -66,7 +66,7 @@
                   </v-chip>
                 </div>
                 <v-card-actions>
-                  <v-btn rounded color="pink" dark>
+                  <v-btn rounded color="pink" dark disabled>
                     {{ article.good_count }}
                     <v-icon dark right> mdi-heart </v-icon>
                   </v-btn>

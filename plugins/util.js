@@ -82,7 +82,7 @@ class Util {
         }
     }
 
-     //ログイン中のみ使用可能なGET
+     //ログイン中のみ使用可能なPOST
      async authPost(url,params={}) {
 
         const status = await this.isLogin()
@@ -95,7 +95,18 @@ class Util {
         }
     }
      
+     //ログイン中のみ使用可能なPUT
+     async authPut(url,params={}) {
 
+        const status = await this.isLogin()
+        if (status) {
+            const acsessToken = this._store.getters.accessToken;
+            const header = { 'Authorization': 'Bearer ' + acsessToken }
+            const result = await this.api.apiPut(url,header ,params);
+           
+            return result
+        }
+    }
 
 
 

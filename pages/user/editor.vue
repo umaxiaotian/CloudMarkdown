@@ -57,6 +57,12 @@ export default {
    this.article_id = this.$route.query.id;
     },
     async saveArticle(title, filename, selection_tag, define_editor_text) {
+      console.log(title);
+ console.log(filename);
+ console.log(selection_tag);
+ console.log(define_editor_text);
+
+
       let params = new FormData();
       params.append("title", title);
       params.append("filename", filename);
@@ -64,11 +70,14 @@ export default {
       params.append("define_editor_text", define_editor_text);
 
       if(!this.article_id){
+        //新規登録の場合
       const article_id = await this.$util.authPost("/post_article/", params);
       this.article_id = article_id;
       this.$router.push("/user/editor?id="+article_id);
 
       }else{
+        console.log(await this.$util.authPut("/update_article/"+this.article_id, params));
+        //更新の場合
         console.log("ID_INNN")
       }
     },
