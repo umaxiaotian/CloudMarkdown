@@ -108,7 +108,18 @@ class Util {
         }
     }
 
-
+     //ログイン中のみ使用可能なDelete
+     async authDelete(url,params={}) {
+        console.log(url)
+        const status = await this.isLogin()
+        if (status) {
+            const acsessToken = this._store.getters.accessToken;
+            const header = { 'Authorization': 'Bearer ' + acsessToken }
+            const result = await this.api.apiDelete(url,header ,params);
+           
+            return result
+        }
+    }
 
 
 }

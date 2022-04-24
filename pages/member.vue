@@ -56,7 +56,6 @@ export default {
   watch: {
     //当子コンポーネントからのパラムGET
     $route(param) {
-      console.log(param.query.id);
       if (param.query.id) {
         this.member_id = param.query.id;
         this.search();

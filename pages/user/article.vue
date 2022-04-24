@@ -10,11 +10,11 @@
           </v-col>
           <!-- コンテンツ一覧 -->
           <v-col cols="12" lg="8">
-             <v-icon large color="blue darken-2">
+            <v-icon large color="blue darken-2">
               mdi-card-account-details-outline
             </v-icon>
             <h1 v-text="result_text"></h1>
-            <UserListView :articles="article_list" />
+            <UserListView :articles="article_list" @refresh="readContents()" />
           </v-col>
           <v-col cols="12" lg="2">
             <RightBanner />
@@ -50,17 +50,22 @@ export default {
       title: "自分の記事一覧",
     };
   },
+  methods: {
+    async readContents() {
+      const article_list = await this.$util.authGet("/user/article/list/");
+      if (article_list && article_list.noResponse != true) {
+        this.article_list = article_list;
+      }else{
+        this.article_list = [];
+      }
+    },
+  },
   async created() {
     this.$vuetify.theme.dark = true;
-    if(await this.$util.isLogin()){
-    const article_list = await this.$util.authGet("/user/article/list/");
-   if(article_list && article_list.noResponse != true){
-    this.article_list = article_list;
-    }
-
-
-    }else{
-       this.$router.push('/')
+    if (await this.$util.isLogin()) {
+      this.readContents();
+    } else {
+      this.$router.push("/");
     }
   },
 };

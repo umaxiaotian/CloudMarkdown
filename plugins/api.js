@@ -15,15 +15,20 @@ export default function ({ $axios }, inject) {
     ///////////////////////
 
     async apiPost(url,header = {},params={}){
-      console.log(params)
         return await this.axios.$post(this.BaseUrl+url,params,
           {headers:header})
         .catch(err => err.response || {noResponse:true})
     }
     async apiPut(url,header = {},params={}){
-      console.log(params)
         return await this.axios.$put(this.BaseUrl+url,params,
           {headers:header})
+        .catch(err => err.response || {noResponse:true})
+    }
+    async apiDelete(url,header = {},params={}){
+        return await this.axios.$delete(this.BaseUrl+url,{
+          headers: header,
+          params: params
+      })
         .catch(err => err.response || {noResponse:true})
     }
     async apiGet(url,header={},params={}){

@@ -50,18 +50,18 @@
         </v-card-actions>
         <v-card-actions>
           <v-row align="center" justify="end">
-            <v-btn
-              v-if="item.is_publish == false"
-              icon
-              :href="'/user/editor?id=' + item.id"
-            >
+            <v-btn v-if="item.is_publish == false" icon @click="publish(item)">
               <v-avatar color="orange darken-1" size="56">
                 <v-icon dark> mdi-cloud-upload </v-icon>
               </v-avatar>
             </v-btn>
 
             <v-avatar size="26" />
-            <v-btn icon v-if="item.is_publish == false">
+            <v-btn
+              icon
+              v-if="item.is_publish == false"
+              @click="deleteArticle(item)"
+            >
               <v-avatar color="red darken-1" size="56">
                 <v-icon dark> mdi-delete </v-icon>
               </v-avatar>
@@ -80,7 +80,7 @@
             <v-btn
               v-if="item.is_publish == true"
               icon
-              :href="'/user/editor?id=' + item.id"
+              @click="disPublish(item)"
             >
               <v-avatar color="pink" size="56">
                 <v-icon dark> mdi-web-cancel </v-icon>
@@ -136,7 +136,6 @@ export default {
   },
   filters: {
     changeImgPath(img) {
-      
       var BaseUrl = process.env.baseUrl;
       return BaseUrl + "/extraResource/" + img;
     },
@@ -147,6 +146,43 @@ export default {
   },
 
   methods: {
+    async publish(val) {
+      await this.$util.authPut("/user/article/publish/" + val.id);
+
+      //親コンポーネントの情報を更新させる
+      this.$emit("refresh", null);
+    },
+    refresh(){},
+    async deleteArticle(val) {
+      this.$swal
+        .fire({
+          title: "削除",
+          html: "本当にこの記事を削除しますか？</br>削除すると二度と修復できません！",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "削除",
+          cancelmButtonText: "キャンセル",
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            this.$util.authDelete("/user/article/delete/" + val.id);
+            this.$emit("refresh", null);
+          }
+        });
+
+      //親コンポーネントの情報を更新させる
+    
+    },
+
+    async disPublish(val) {
+      await this.$util.authPut("/user/article/dispublish/" + val.id);
+
+      //親コンポーネントの情報を更新させる
+      this.$emit("refresh", null);
+    },
+
     pageChange(pageNumber) {
       this.viewLists = this.lists.slice(
         this.pageSize * (pageNumber - 1),

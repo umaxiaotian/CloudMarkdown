@@ -53,7 +53,6 @@ export default {
   methods: {
     showModal(item) {
       var BaseUrl = process.env.baseUrl;
-      console.log(BaseUrl);
       this.$swal.fire({
         title: item.title,
 
