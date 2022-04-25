@@ -39,10 +39,10 @@
           </v-chip>
         </div>
         <v-card-actions>
-          <v-btn rounded color="pink" dark>
-            {{ item.good_count }}
-            <v-icon dark right> mdi-heart </v-icon>
-          </v-btn>
+          <v-card-title>
+            <v-icon large left color="red"> mdi-heart </v-icon>
+            <span class="text-h6 font-weight-light">いいね：{{ item.good_count }}</span>
+          </v-card-title>
         </v-card-actions>
       </v-card>
       <div class="mx-3 my-5" />
@@ -93,7 +93,6 @@ export default {
 
   filters: {
     changeImgPath(img) {
-      
       var BaseUrl = process.env.baseUrl;
       return BaseUrl + "/extraResource/" + img;
     },

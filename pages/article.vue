@@ -33,8 +33,7 @@
 
                     <!-- mdviewr -->
                   </v-list-item-content>
-                  <v-list-item-avatar tile size="80" color="grey"
-                    >
+                  <v-list-item-avatar tile size="80" color="grey">
                     <img :src="article.img | changeImgPath"
                   /></v-list-item-avatar>
                 </v-list-item>
@@ -51,7 +50,12 @@
                   </v-chip>
                 </div>
                 <v-card-actions>
-                  <v-btn rounded color="pink" dark>
+                  <v-btn
+                    rounded
+                    color="pink"
+                    dark
+                    @click="clickHeart(article.id)"
+                  >
                     {{ article.good_count }}
                     <v-icon dark right> mdi-heart </v-icon>
                   </v-btn>
@@ -97,12 +101,11 @@ export default {
       title: this.article.title,
     };
   },
-    filters: {
+  filters: {
     changeImgPath(img) {
-      
-      if(img){
-      var BaseUrl = process.env.baseUrl;
-      return BaseUrl + "/extraResource/" + img;
+      if (img) {
+        var BaseUrl = process.env.baseUrl;
+        return BaseUrl + "/extraResource/" + img;
       }
     },
   },
@@ -117,6 +120,26 @@ export default {
   },
 
   methods: {
+    async clickHeart(article_id) {
+      const isLogin = await this.$util.isLogin();
+      if (isLogin) {
+        const goodAdd = await this.$util.authPut(
+          "/user/article/good_add/" + article_id
+        );
+        if (goodAdd && goodAdd.detail == "Already_Good") {
+          await this.$util.authDelete(
+            "/user/article/good_remove/" + article_id
+          );
+        }
+        this.getArticle();
+      } else {
+        this.$swal.fire(
+          "ログインしていますか?",
+          "「いいね」をするためにはログインする必要があります。",
+          "question"
+        );
+      }
+    },
     async getArticle() {
       this.article = await this.$api.apiGet("/article/" + this.article_id);
     },
