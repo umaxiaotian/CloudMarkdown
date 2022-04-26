@@ -34,7 +34,9 @@ module.exports = {
     proxy: true,
   },
   server: {
-    port: 8080, // デフォルト: 3000
+    port: 8080, // default: 3000
+    host: '0.0.0.0', // default: localhost,
+    timing: false
   },
   vuetify: {
     theme: {
