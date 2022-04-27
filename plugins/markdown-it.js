@@ -1,6 +1,6 @@
 import MarkdownIt from 'markdown-it'
 import markdownItGithubToc from 'markdown-it-github-toc'
-import MarkdownItMermaid from '@DatatracCorporation/markdown-it-mermaid'
+import MarkdownItMermaid from '@datatraccorporation/markdown-it-mermaid'
 export default ({ app }, inject) => {
   const md = new MarkdownIt({
     langPrefix: 'language-',
