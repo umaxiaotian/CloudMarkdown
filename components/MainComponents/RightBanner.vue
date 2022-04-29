@@ -52,7 +52,7 @@ export default {
 
   methods: {
     showModal(item) {
-      var BaseUrl = process.env.baseUrl;
+      const ExtraFile = process.env.extrafile;
       this.$swal.fire({
         title: item.title,
 
@@ -62,7 +62,7 @@ export default {
 
         backdrop: `
     rgba(0,0,123,0.4)
-    url("`+BaseUrl+`/extraResource/IMG_2819.gif")
+    url("`+ExtraFile+`/extraResource/IMG_2819.gif")
     left top
     no-repeat
   `,

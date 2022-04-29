@@ -12,7 +12,7 @@ module.exports = {
   },
   env: {
     //APIの向き先
-    baseUrl: process.env.BASE_URL || 'http://localhost:8000',
+    extrafile: process.env.EXTRA_FILE_URL || 'https://cloudmarkdown-api.umaxiaotian.com',
   },
   loading: false,
   plugins: [
@@ -33,6 +33,12 @@ module.exports = {
   axios: {
     proxy: true,
   },
+  proxy: {
+    '/api/': {
+      target: process.env.BASE_URL || 'https://cloudmarkdown-api.umaxiaotian.com',
+      pathRewrite: {'^/api/': ''},
+    }
+},
   server: {
     port: 3000, // default: 3000
     host: '0.0.0.0', // default: localhost,

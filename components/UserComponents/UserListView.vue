@@ -136,8 +136,8 @@ export default {
   },
   filters: {
     changeImgPath(img) {
-      var BaseUrl = process.env.baseUrl;
-      return BaseUrl + "/extraResource/" + img;
+      const ExtraFile = process.env.extrafile;
+      return ExtraFile + "/extraResource/" + img;
     },
   },
 
