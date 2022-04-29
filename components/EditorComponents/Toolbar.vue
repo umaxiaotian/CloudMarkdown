@@ -170,7 +170,8 @@ export default {
         let params = new FormData();
         params.append("upload_file", item);
         const result = await this.$util.authPost("/uploadfile/", params);
-        this.editText( "LeftAdd","![画像](" + '/api/' + result.filename + ")\n");
+        const ExtraFile = process.env.extrafile;
+        this.editText( "LeftAdd","![画像](" + ExtraFile + "/extraResource/" + result.filename + ")\n");
       }
       //自滅
       this.dialog = false;
