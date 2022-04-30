@@ -8,7 +8,7 @@ export default function ({ $axios }, inject) {
     constructor (axios) {
       this.axios = axios
     }   
-        BaseUrl=process.env.baseUrl;
+    
 
     ///////////////////////
     //　　非会員向けAPI　 //
@@ -42,7 +42,7 @@ export default function ({ $axios }, inject) {
       var user_params = new URLSearchParams();
       user_params.append('username', params.username);
       user_params.append('password', params.password);
-      return await this.axios.$post('https://cloudmarkdown-api.umaxiaotian.com'+url,user_params)
+      return await this.axios.$post('/api/'+url,user_params)
       .catch(err => err.response || {noResponse:true})
   }
    
