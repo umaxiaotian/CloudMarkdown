@@ -38,12 +38,21 @@ export default function ({ $axios }, inject) {
       })
       .catch(err => err.response || {noResponse:true})
   }
-    async apiLogin(url,params={}){
+    async apiLogin(target,params={}){
       var user_params = new URLSearchParams();
       user_params.append('username', params.username);
       user_params.append('password', params.password);
-      return await this.axios.$post(this.BaseUrl+url,user_params)
-      .catch(err => err.response || {noResponse:true})
+
+      var config = {
+        method: 'post',
+        url: this.BaseUrl+target,
+        data: user_params,
+        headers: { 
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+      };
+
+      return await this.axios(config).catch(err => err.response || {noResponse:true})
   }
    
 }

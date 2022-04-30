@@ -13,6 +13,7 @@ module.exports = {
   env: {
     //APIの向き先
     extrafile: process.env.EXTRA_FILE_URL || 'https://cloudmarkdown-api.umaxiaotian.com',
+    baseUrl: process.env.BASE_URL || 'https://cloudmarkdown-api.umaxiaotian.com'
   },
   loading: false,
   plugins: [

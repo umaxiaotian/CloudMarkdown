@@ -66,14 +66,14 @@ export default {
         !this.$store.getters.accessToken &&
         !this.$store.getters.refresh_token
       ) {
-        const login_result = await this.$api.apiLogin("/token/", {
+        const login_result = await this.$api.apiLogin("/token", {
           username: this.user,
           password: this.password,
         });
 
-        if (!login_result.data) {
-          this.$store.commit("accessToken", login_result.access_token);
-          this.$store.commit("refreshToken", login_result.refresh_token);
+        if (login_result.data) {
+          this.$store.commit("accessToken", login_result.data.access_token);
+          this.$store.commit("refreshToken", login_result.data.refresh_token);
         } else {
           this.$swal.fire({
             icon: "error",
