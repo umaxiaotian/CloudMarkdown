@@ -27,24 +27,31 @@
           </v-list-item>
         </v-list-item-group>
       </v-list>
+
       <template #append>
         <div class="mb-5 d-flex justify-center align-center">
-          <v-btn icon>
+          <v-btn color="primary" dark @click="openUserProfile()">
             <v-avatar :size="26">
               <v-icon dark> mdi-account-cog </v-icon>
             </v-avatar>
           </v-btn>
         </div>
       </template>
+      <UserProfile v-model="dialog" />
     </v-navigation-drawer>
   </div>
 </template>
 <script>
+import UserProfile from "@/components/UserComponents/UserProfile";
 export default {
+  components: {
+    UserProfile,
+  },
   data() {
     return {
       isLogin: false,
       model: null,
+      dialog: false,
       items: [
         {
           text: "自分の記事",
@@ -53,6 +60,11 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    openUserProfile() {
+      this.dialog = true;
+    },
   },
   async created() {
     this.isLogin = await this.$util.isLogin();
