@@ -1,5 +1,5 @@
-export default function ({ $api, store, $swal,  }, inject) {
-    const util = new Util($api, store, $swal, )
+export default function ({ $api, store, $swal, }, inject) {
+    const util = new Util($api, store, $swal,)
     inject('util', util)
 }
 // import store from '@/store/index.js';
@@ -70,53 +70,53 @@ class Util {
     }
 
     //ログイン中のみ使用可能なGET
-    async authGet(url,params={}) {
+    async authGet(url, params = {}) {
 
         const status = await this.isLogin()
         if (status) {
             const acsessToken = this._store.getters.accessToken;
             const header = { 'Authorization': 'Bearer ' + acsessToken }
-            const result = await this.api.apiGet(url, header,params);
-           
+            const result = await this.api.apiGet(url, header, params);
+
             return result
         }
     }
 
-     //ログイン中のみ使用可能なPOST
-     async authPost(url,params={}) {
+    //ログイン中のみ使用可能なPOST
+    async authPost(url, params = {}) {
 
         const status = await this.isLogin()
         if (status) {
             const acsessToken = this._store.getters.accessToken;
             const header = { 'Authorization': 'Bearer ' + acsessToken }
-            const result = await this.api.apiPost(url,header ,params);
-           
+            const result = await this.api.apiPost(url, header, params);
+
             return result
         }
     }
-     
-     //ログイン中のみ使用可能なPUT
-     async authPut(url,params={}) {
+
+    //ログイン中のみ使用可能なPUT
+    async authPut(url, params = {}) {
 
         const status = await this.isLogin()
         if (status) {
             const acsessToken = this._store.getters.accessToken;
             const header = { 'Authorization': 'Bearer ' + acsessToken }
-            const result = await this.api.apiPut(url,header ,params);
-           
+            const result = await this.api.apiPut(url, header, params);
+
             return result
         }
     }
 
-     //ログイン中のみ使用可能なDelete
-     async authDelete(url,params={}) {
+    //ログイン中のみ使用可能なDelete
+    async authDelete(url, params = {}) {
         console.log(url)
         const status = await this.isLogin()
         if (status) {
             const acsessToken = this._store.getters.accessToken;
             const header = { 'Authorization': 'Bearer ' + acsessToken }
-            const result = await this.api.apiDelete(url,header ,params);
-           
+            const result = await this.api.apiDelete(url, header, params);
+
             return result
         }
     }

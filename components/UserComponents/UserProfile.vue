@@ -168,6 +168,7 @@ export default {
       params.append("avater", filename);
 
       const result = await this.$util.authPut("/update_user_profile/", params);
+
       if (result) {
         this.$swal.fire({
           position: "top-end",

@@ -1,18 +1,16 @@
-export default function ({ $axios }, inject) {
-    const api = new API($axios)
+export default function ({ $axios, $swal }, inject) {
+    const api = new API($axios, $swal)
   
     inject('api', api)
   }
   
   class API {
-    constructor (axios) {
+    constructor (axios,swal) {
       this.axios = axios
+      this.swal = swal
     }   
     
     BaseUrl=process.env.baseUrl;
-    ///////////////////////
-    //　　非会員向けAPI　 //
-    ///////////////////////
 
     async apiPost(url,header = {},params={}){
         return await this.axios.$post(this.BaseUrl+url,params,
@@ -22,7 +20,15 @@ export default function ({ $axios }, inject) {
     async apiPut(url,header = {},params={}){
         return await this.axios.$put(this.BaseUrl+url,params,
           {headers:header})
-        .catch(err => err.response || {noResponse:true})
+        .catch(err => {
+          this.swal.fire({
+            icon: 'error',
+            title: '更新エラー',
+            text: err.response.data.detail,
+          })
+
+
+        })
     }
     async apiDelete(url,header = {},params={}){
         return await this.axios.$delete(this.BaseUrl+url,{
