@@ -38,7 +38,7 @@
                   </v-col>
                   <v-col cols="12" sm="6" md="6">
                     <v-text-field
-                      label="氏名*"
+                      label="ログインユーザー名*"
                       v-model="user.name"
                       required
                     ></v-text-field>
