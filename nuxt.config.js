@@ -4,8 +4,7 @@
  * @link {https://nuxtjs.org/guide/configuration/}
  */
 module.exports = {
-  ssr: false,
-  target: 'static',
+  ssr: true,
   head: {
     title: 'CloudMarkdown',
     meta: [{ charset: 'utf-8' }]
