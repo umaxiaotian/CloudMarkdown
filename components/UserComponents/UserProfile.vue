@@ -87,6 +87,7 @@
                     <v-text-field
                       label="現在のパスワード*"
                       type="password"
+                      v-model="password.current"
                       required
                     ></v-text-field>
                   </v-col>
@@ -94,6 +95,7 @@
                     <v-text-field
                       label="新パスワード*"
                       type="password"
+                      v-model="password.newpass"
                       required
                     ></v-text-field>
                   </v-col>
@@ -101,6 +103,7 @@
                     <v-text-field
                       label="新パスワード再度入力*"
                       type="password"
+                      v-model="password.renewpass"
                       required
                     ></v-text-field>
                   </v-col>
@@ -113,8 +116,8 @@
               <v-btn color="blue darken-1" text @click="_model = false">
                 閉じる
               </v-btn>
-              <v-btn color="blue darken-1" text @click="_model = false">
-                保存
+              <v-btn color="blue darken-1" text @click="changeCurrentPassword">
+                更新
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -128,6 +131,7 @@ export default {
   data() {
     return {
       user: [],
+      password: [],
       chgProfileImgSrc: null,
       chgProfileImgObjecy: null,
     };
@@ -180,6 +184,51 @@ export default {
         this.firstFunction();
       }
     },
+
+    async changeCurrentPassword() {
+      console.log(this.password.renewpass);
+      console.log(this.password.newpass);
+
+      if (
+        this.password.renewpass &&
+        this.password.newpass &&
+        this.password.current
+      ) {
+        if (this.password.renewpass != this.password.newpass) {
+          this.$swal.fire({
+            icon: "error",
+            title: "バリデーションエラー",
+            text: "新しいパスワードが一致しません",
+          });
+        } else {
+          //更新部分
+          let params = new FormData();
+          params.append("current_pw", this.password.current);
+          params.append("new_pw", this.password.newpass);
+          const result = await this.$util.authPut(
+            "/update_user_password/",
+            params
+          );
+          //成功を報告
+          if (result) {
+            this.$swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "正常にパスワードを更新しました。",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+        }
+      } else {
+        this.$swal.fire({
+          icon: "error",
+          title: "バリデーションエラー",
+          text: "必須項目がすべて入力されていません",
+        });
+      }
+    },
+
     changeImgProfile(item) {
       if (item) {
         this.chgProfileImgObjecy = item;
@@ -193,6 +242,9 @@ export default {
       }
     },
     async firstFunction() {
+      this.password.current = "";
+      this.password.newpass = "";
+      this.password.renewpass = "";
       const isLogin = await this.$util.isLogin();
       if (isLogin) {
         const acsessToken = this.$store.getters.accessToken;
