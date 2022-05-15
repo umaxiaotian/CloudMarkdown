@@ -21,11 +21,13 @@
       </pane>
       <pane :size="100 - paneSize">
         <div @mouseover="forcus('Viewr')">
+            <no-ssr>
           <Viewarea
             id="rightView"
             :markdown="markdown"
             @vScroll="viewrScroll"
           />
+            </no-ssr>
         </div>
       </pane>
     </splitpanes>
