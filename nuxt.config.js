@@ -4,8 +4,8 @@
  * @link {https://nuxtjs.org/guide/configuration/}
  */
 module.exports = {
-  ssr: false,
-  target: 'static',
+  ssr: true,
+  // target: 'static',
   head: {
     title: 'CloudMarkdown',
     meta: [{ charset: 'utf-8' }]
@@ -18,10 +18,10 @@ module.exports = {
   loading: false,
   plugins: [
     { src:  '@/plugins/markdown-it',ssr: false },
-    { src:  '@/plugins/axios',ssr: false },
-    { src:  '@/plugins/api',ssr: false },
+    { src:  '@/plugins/axios',ssr: true },
+    { src:  '@/plugins/api',ssr: true },
     { src: '@/plugins/persistedstate.js', ssr: false },
-    { src: '@/plugins/util.js' , ssr: false}
+    { src: '@/plugins/util.js' , ssr: true}
   ],
   buildModules: [
     { src: '@nuxt/typescript-build',ssr: false },
