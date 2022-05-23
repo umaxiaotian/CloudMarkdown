@@ -1,6 +1,6 @@
 <template>
   <v-app-bar app class="darken-4" flat>
-            <v-avatar />
+    <v-avatar />
     <v-tabs class="ml-n9" color="grey darken-1" v-model="model">
       <v-tab v-for="(link, index) in links" :key="index" :href="link.address">
         {{ link.title }}
@@ -19,9 +19,15 @@
     <v-btn icon @click="searchText()">
       <v-icon>mdi-magnify</v-icon>
     </v-btn>
-    <v-btn v-if="!isLogin" class="ma-2" color="blue" @click="login()"> ログイン </v-btn>
-     <v-btn v-if="isLogin" class="ma-2" color="blue" @click="logout()"> ログアウト </v-btn>
- 
+    <v-btn v-if="!isLogin" class="ma-2" color="blue" @click="register()">
+      新規登録
+    </v-btn>
+    <v-btn v-if="!isLogin" class="ma-2" color="blue" @click="login()">
+      ログイン
+    </v-btn>
+    <v-btn v-if="isLogin" class="ma-2" color="blue" @click="logout()">
+      ログアウト
+    </v-btn>
   </v-app-bar>
 </template>
 
@@ -42,28 +48,28 @@ export default {
       ],
     };
   },
-  created(){
-     const acsessToken = this.$store.getters.accessToken;
-      const refreshToken = this.$store.getters.refreshToken;
-      if (acsessToken && refreshToken) {
-        this.isLogin= true;
-      }else{
-         this.isLogin= false;
-      }
+  created() {
+    const acsessToken = this.$store.getters.accessToken;
+    const refreshToken = this.$store.getters.refreshToken;
+    if (acsessToken && refreshToken) {
+      this.isLogin = true;
+    } else {
+      this.isLogin = false;
+    }
   },
   methods: {
-    login() {
-        this.$router.push('/login')
-    //    console.log(await this.$util.refreshTokenReLogin());
+    register() {
+      this.$router.push("/register");
     },
-    async logout(){
-        // console.log(await  this.$util.refreshTokenReLogin());
-        this.$store.commit("accessToken", null);
-        this.$store.commit("refreshToken", null);
-          this.$router.push('/login')
+    login() {
+      this.$router.push("/login");
+    },
+    async logout() {
+      this.$store.commit("accessToken", null);
+      this.$store.commit("refreshToken", null);
+      this.$router.push("/login");
     },
     searchText() {
-      //   this.$router.push({ name: 'search', params: { search } })
       this.$router.push({
         path: "/search",
         query: { searchText: this.search },
