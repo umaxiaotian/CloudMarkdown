@@ -19,7 +19,7 @@
     <v-btn icon @click="searchText()">
       <v-icon>mdi-magnify</v-icon>
     </v-btn>
-    <v-btn v-if="!isLogin" class="ma-2" color="blue" @click="register()">
+    <v-btn v-if="!isLogin" class="ma-2" color="green" @click="register()">
       新規登録
     </v-btn>
     <v-btn v-if="!isLogin" class="ma-2" color="blue" @click="login()">

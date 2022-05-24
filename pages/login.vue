@@ -1,7 +1,11 @@
 <template>
-  <v-app>
+  <v-app
+    style="
+      background-image: url('https://gochiusa.com/core_sys/images/main/cont/special/43/chino_1920.jpg');
+      background-size: cover;
+    "
+  >
     <Header />
-
     <v-container fill-height>
       <v-card
         class="d-flex flex-column mx-auto my-6 flat"
@@ -12,58 +16,28 @@
           >ログイン</v-card-title
         >
         <v-card-text class="d-flex justify-center flex-column">
-          <v-btn
-            class="fill-width mt-6 text-capitalize caption mx-4"
-            rounded
-            color="#00ACEE"
-            dark
-            depressed
-            height="48px"
-            @click="submitTwitter"
-          >
-            <img
-              class="button-logo-img mr-4"
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Twitter-logo.svg/2491px-Twitter-logo.svg.png"
-              style="height: 20px"
-            />
-            twitterでログイン
-          </v-btn>
-          <v-btn
-            class="fill-width mt-6 text-capitalize caption mx-4 mb-6"
-            rounded
-            height="48px"
-            outlined
-            style="border-color: #979797"
-            @click="submitGoogle"
-          >
-            <img
-              class="button-logo-img mr-4"
-              src="https://madeby.google.com/static/images/google_g_logo.svg"
-              style="height: 24px"
-            />
-            Googleでログイン
-          </v-btn>
           <p class="text-center pt-3 mt-3 text-subtitle-1 siginIn-border-top">
-            メールアドレスでログイン
+            ユーザー名でログイン
           </p>
           <v-form class="mx-9" ref="form" v-model="valid">
             <v-text-field
-              placeholder="メールアドレス"
+              placeholder="ユーザー名"
               outlined
               dense
               v-model="user"
-              :rules="mailRules"
+              :rules="usrRules"
             ></v-text-field>
             <v-text-field
               placeholder="パスワード"
               outlined
               dense
+              type="password"
               v-model="password"
               :rules="pwRules"
             ></v-text-field>
             <p class="pointer" @click="forgetPw">パスワードを忘れた方</p>
             <div class="text-center">
-              <v-btn class="primary" :disabled="!valid" @click="postLogin()"
+              <v-btn color="blue" :disabled="!valid" @click="postLogin()"
                 >ログイン</v-btn
               >
             </div>
@@ -84,10 +58,7 @@ export default {
   data() {
     return {
       valid: false,
-      mailRules: [
-        (v) => !!v || "メールアドレスは必須です",
-        (v) => /.+@.+\..+/.test(v) || "正しいメールアドレスを入力してください",
-      ],
+      usrRules: [(v) => !!v || "ユーザー名は必須です"],
       pwRules: [(v) => !!v || "パスワードは必須です"],
       user: "",
       password: "",
@@ -99,14 +70,8 @@ export default {
     };
   },
   methods: {
-        validate() {
+    validate() {
       this.$refs.form.validate();
-    },
-    submitTwitter() {
-      // ツイッターログインの処理
-    },
-    submitGoogle() {
-      // グーグルログインの処理
     },
     forgetPw() {
       // パスワードを忘れた時の処理
@@ -123,15 +88,11 @@ export default {
           password: this.password,
         });
 
-        if (login_result.data) {
+        if (login_result && login_result.data) {
           this.$store.commit("accessToken", login_result.data.access_token);
           this.$store.commit("refreshToken", login_result.data.refresh_token);
         } else {
-          this.$swal.fire({
-            icon: "error",
-            title: "エラー",
-            text: login_result.data.detail,
-          });
+          console.log("Authenticate Error");
         }
       }
 
