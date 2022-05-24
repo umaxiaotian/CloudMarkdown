@@ -63,7 +63,7 @@
             ></v-text-field>
             <p class="pointer" @click="forgetPw">パスワードを忘れた方</p>
             <div class="text-center">
-              <v-btn class="primary" :disabled="valid" @click="postLogin()"
+              <v-btn class="primary" :disabled="!valid" @click="postLogin()"
                 >ログイン</v-btn
               >
             </div>
@@ -99,6 +99,9 @@ export default {
     };
   },
   methods: {
+        validate() {
+      this.$refs.form.validate();
+    },
     submitTwitter() {
       // ツイッターログインの処理
     },
