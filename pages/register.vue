@@ -96,7 +96,7 @@ export default {
     validate() {
       this.$refs.form.validate();
     },
-    register() {
+    async register() {
       console.log(this.registerForm.user);
       //パスワード突合チェック
       if (this.registerForm.password_first != this.registerForm.password_last) {
@@ -105,6 +105,24 @@ export default {
           title: "バリデーションエラー",
           text: "パスワードが一致していません。",
         });
+      } else {
+        //OK
+
+        var user_params = new URLSearchParams();
+        user_params.append("username", this.registerForm.user);
+        user_params.append("password", this.registerForm.password_first);
+        user_params.append("nickname", this.registerForm.nickname);
+        user_params.append("email", this.registerForm.email);
+
+        const token = await this.$api.apiPost("/register", null, user_params);
+
+        if (token) {
+          this.$store.commit("accessToken", token.access_token);
+          this.$store.commit("refreshToken", token.refresh_token);
+          this.$router.push("/user/article");
+        } else {
+          console.log("Authenticate Error");
+        }
       }
     },
   },

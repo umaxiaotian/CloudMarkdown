@@ -14,8 +14,17 @@ class API {
 
   async apiPost(url, header = {}, params = {}) {
     return await this.axios.$post(this.BaseUrl + url, params,
-      { headers: header })
-      .catch(err => err.response || { noResponse: true })
+      {
+        headers: header,
+        data: params,
+      })
+      .catch(err => {
+        this.swal.fire({
+          icon: 'error',
+          title: 'エラー',
+          text: err.response.data.detail,
+        })
+      })
   }
   async apiPut(url, header = {}, params = {}) {
     return await this.axios.$put(this.BaseUrl + url, params,
@@ -23,7 +32,7 @@ class API {
       .catch(err => {
         this.swal.fire({
           icon: 'error',
-          title: '更新エラー',
+          title: 'エラー',
           text: err.response.data.detail,
         })
       })
