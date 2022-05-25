@@ -63,7 +63,7 @@ export default {
     },
   },
   created() {
-    this.$vuetify.theme.dark = true;
+    
 
     //外部から来た人向けのサーチパラムGET
     this.member_id = this.$route.query.id;

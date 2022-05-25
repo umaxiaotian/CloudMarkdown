@@ -20,13 +20,15 @@
                 placeholder="15文字以内"
                 outlined
                 dense
+                v-model="registerForm.user"
                 :rules="nameRules"
               ></v-text-field>
-                <v-text-field
+              <v-text-field
                 label="ニックネーム"
                 placeholder="15文字以内"
                 outlined
                 dense
+                v-model="registerForm.nickname"
                 :rules="nameRules"
               ></v-text-field>
               <v-text-field
@@ -34,6 +36,7 @@
                 placeholder="mail@example.com"
                 outlined
                 dense
+                v-model="registerForm.email"
                 :rules="mailRules"
               ></v-text-field>
               <v-text-field
@@ -41,11 +44,22 @@
                 placeholder="8文字以上の半角英数記号"
                 outlined
                 dense
+                v-model="registerForm.password_first"
+                :rules="pwRules"
+              ></v-text-field>
+              <v-text-field
+                label="パスワード確認"
+                placeholder="8文字以上の半角英数記号"
+                outlined
+                dense
+                v-model="registerForm.password_last"
                 :rules="pwRules"
               ></v-text-field>
             </div>
             <div class="text-center">
-              <v-btn class="primary" :disabled="!valid">登録</v-btn>
+              <v-btn class="primary" :disabled="!valid" @click="register()"
+                >登録</v-btn
+              >
             </div>
           </v-card-text>
         </v-form>
@@ -60,9 +74,7 @@ export default {
   components: {
     Header,
   },
-  created() {
-    this.$vuetify.theme.dark = true;
-  },
+  created() {},
   data() {
     return {
       valid: false,
@@ -75,11 +87,23 @@ export default {
         (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
       ],
       pwRules: [(v) => !!v || "パスワードは必須です"],
+      registerForm: [],
     };
   },
   methods: {
     validate() {
       this.$refs.form.validate();
+    },
+    register() {
+      console.log(this.registerForm.user);
+      //パスワード突合チェック
+      if (this.registerForm.password_first != this.registerForm.password_last) {
+        this.$swal.fire({
+          icon: "error",
+          title: "バリデーションエラー",
+          text: "パスワードが一致していません。",
+        });
+      }
     },
   },
 };

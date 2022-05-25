@@ -22,10 +22,10 @@
     <v-btn v-if="!isLogin" class="ma-2" color="green" @click="register()">
       新規登録
     </v-btn>
-    <v-btn v-if="!isLogin" class="ma-2" color="blue" @click="login()">
+    <v-btn v-if="!isLogin" class="ma-2" color="primary" @click="login()">
       ログイン
     </v-btn>
-    <v-btn v-if="isLogin" class="ma-2" color="blue" @click="logout()">
+    <v-btn v-if="isLogin" class="ma-2" color="primary" @click="logout()">
       ログアウト
     </v-btn>
   </v-app-bar>

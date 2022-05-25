@@ -53,7 +53,7 @@ export default {
     };
   },
   async created() {
-    this.$vuetify.theme.dark = true;
+    
 
     const article_list = await this.$api.apiGet("/article/list/");
     if(article_list && article_list.noResponse != true){

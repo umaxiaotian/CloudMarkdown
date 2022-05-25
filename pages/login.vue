@@ -37,7 +37,7 @@
             ></v-text-field>
             <p class="pointer" @click="forgetPw">パスワードを忘れた方</p>
             <div class="text-center">
-              <v-btn color="blue" :disabled="!valid" @click="postLogin()"
+              <v-btn color="primary" :disabled="!valid" @click="postLogin()"
                 >ログイン</v-btn
               >
             </div>
@@ -105,7 +105,7 @@ export default {
     },
   },
   created() {
-    this.$vuetify.theme.dark = true;
+    
 
     //認証したら/へジャンプする。
     const acsessToken = this.$store.getters.accessToken;

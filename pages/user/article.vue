@@ -10,7 +10,7 @@
           </v-col>
           <!-- コンテンツ一覧 -->
           <v-col cols="12" lg="8">
-            <v-icon large color="blue darken-2">
+            <v-icon large color="primary darken-2">
               mdi-card-account-details-outline
             </v-icon>
             <h1 v-text="result_text"></h1>
@@ -61,7 +61,7 @@ export default {
     },
   },
   async created() {
-    this.$vuetify.theme.dark = true;
+    
     if (await this.$util.isLogin()) {
       this.readContents();
     } else {

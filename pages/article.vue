@@ -41,7 +41,7 @@
                 <div class="text-left">
                   <v-chip
                     class="ma-2"
-                    color="blue"
+                    color="primary"
                     v-for="tag in article.tags"
                     :key="tag.id"
                     :href="'/tags?id=' + tag.tag_id"
@@ -110,7 +110,7 @@ export default {
     },
   },
   created() {
-    this.$vuetify.theme.dark = true;
+    
 
     //外部から来た人向けのサーチパラムGET
     this.article_id = this.$route.query.article_id;
