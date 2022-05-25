@@ -12,7 +12,7 @@
       :extended="isSearching"
       style="position: sticky; top: 0; z-index: 1; margin-right: 1px"
     >
-      <v-btn class="ma-2" text icon color="blue" @click="save()">
+      <v-btn class="ma-2" text icon color="primary" @click="save()">
         <v-icon>mdi-content-save</v-icon>
       </v-btn>
       <v-toolbar-title> ツールバー </v-toolbar-title>
@@ -51,7 +51,7 @@
         selection_tag
         clearable
         multiple
-        background-color="blue"
+        background-color="primary"
         solo
       >
         <template v-slot:selection="{ attrs, item, select, selected }">
@@ -354,7 +354,7 @@ export default {
     projects: [
       { label: "Accounting", color: "cyan", due_count: 1 },
       { label: "Secret Game", color: "green" },
-      { label: "Dashboard", color: "blue", due_count: 1 },
+      { label: "Dashboard", color: "primary", due_count: 1 },
     ],
   }),
 };

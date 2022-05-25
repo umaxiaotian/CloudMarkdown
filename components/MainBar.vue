@@ -9,7 +9,7 @@
     >
       <div class="d-block text-center mx-auto mt-4">
         <v-btn icon :href="'/user/editor'">
-          <v-avatar color="blue darken-1" size="36">
+          <v-avatar color="primary darken-1" size="36">
             <v-icon dark> mdi-draw </v-icon>
           </v-avatar>
         </v-btn>
@@ -30,7 +30,7 @@
 
       <template #append>
         <div class="mb-5 d-flex justify-center align-center">
-          <v-btn color="blue darken-3" dark @click="openUserProfile()">
+          <v-btn color="primary darken-3" dark @click="openUserProfile()">
             <v-avatar :size="26">
               <v-icon dark> mdi-account-cog </v-icon>
             </v-avatar>

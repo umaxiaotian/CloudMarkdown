@@ -34,7 +34,7 @@
         <div class="text-left">
           <v-chip
             class="ma-2"
-            color="blue"
+            color="primary"
             v-for="tag in item.tags"
             :key="tag.id"
             :href="'/tags?id=' + tag.tag_id"
@@ -72,7 +72,7 @@
               v-if="item.is_publish == false"
               :href="'/user/editor?id=' + item.id"
             >
-              <v-avatar color="blue darken-1" size="56">
+              <v-avatar color="primary darken-1" size="56">
                 <v-icon dark> mdi-draw </v-icon>
               </v-avatar>
             </v-btn>
@@ -94,7 +94,7 @@
     <v-pagination
       v-model="page"
       :length="length"
-      color="blue"
+      color="primary"
       @input="pageChange"
     ></v-pagination>
   </div>
@@ -142,7 +142,7 @@ export default {
   },
 
   async created() {
-    this.$vuetify.theme.dark = true;
+    
   },
 
   methods: {

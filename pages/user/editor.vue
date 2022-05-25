@@ -42,7 +42,7 @@ export default {
     tags_all: [],
   }),
   async created() {
-    this.$vuetify.theme.dark = true;
+    
 
     this.tags_all = await this.$api.apiGet("/article/tags/list_all");
     //外部から来た人向けのサーチパラムGET

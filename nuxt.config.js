@@ -3,6 +3,7 @@
  * This default configuration can be overwritten in this file
  * @link {https://nuxtjs.org/guide/configuration/}
  */
+import colors from 'vuetify/lib/util/colors'
 module.exports = {
   ssr: false,
   target: 'static',
@@ -41,14 +42,18 @@ module.exports = {
   },
   vuetify: {
     theme: {
+      dark: true,
       themes: {
-        light: {
-          primary: '#1867c0',
-          secondary: '#b0bec5',
-          accent: '#8c9eff',
-          error: '#b71c1c'
+        dark: {
+          primary: colors.blue,
+          accent: colors.grey.darken3,
+          secondary: colors.amber.darken3,
+          info: colors.teal.lighten1,
+          warning: colors.amber.base,
+          error: colors.deepOrange.accent4,
+          success: colors.green.accent3
         }
       }
     }
-  }
+  },
 }

@@ -30,7 +30,7 @@
         <div class="text-left">
           <v-chip
             class="ma-2"
-            color="blue"
+            color="primary"
             v-for="tag in item.tags"
             :key="tag.id"
             :href="'/tags?id=' + tag.tag_id"
@@ -50,7 +50,7 @@
     <v-pagination
       v-model="page"
       :length="length"
-      color="blue"
+      color="primary"
       @input="pageChange"
     ></v-pagination>
   </div>
@@ -99,7 +99,7 @@ export default {
   },
 
   async created() {
-    this.$vuetify.theme.dark = true;
+    
   },
 
   methods: {

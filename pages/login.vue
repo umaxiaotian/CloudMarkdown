@@ -1,44 +1,50 @@
 <template>
-  <v-app>
+  <v-app
+    style="
+      background-image: url('https://gochiusa.com/core_sys/images/main/cont/special/43/chino_1920.jpg');
+      background-size: cover;
+    "
+  >
     <Header />
-    <v-main class="grey darken-3">
-      <v-container class="fill-height" fluid>
-        <v-row align="center" justify="center">
-          <v-col cols="12" sm="8" md="4">
-            <v-card class="elevation-12">
-              <v-toolbar color="blue" dark flat>
-                <v-toolbar-title>ログイン</v-toolbar-title>
-                <v-spacer />
-              </v-toolbar>
-              <v-card-text>
-                <v-form>
-                  <v-text-field
-                    label="ユーザー名"
-                    name="user"
-                    prepend-icon="mdi-account"
-                    type="text"
-                    v-model="user"
-                  />
-
-                  <v-text-field
-                    id="password"
-                    label="パスワード"
-                    name="password"
-                    prepend-icon="mdi-lock"
-                    type="password"
-                    v-model="password"
-                  />
-                </v-form>
-              </v-card-text>
-              <v-card-actions>
-                <v-spacer />
-                <v-btn @click="postLogin" color="blue">ログイン</v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-main>
+    <v-container fill-height>
+      <v-card
+        class="d-flex flex-column mx-auto my-6 flat"
+        width="374"
+        color="gray"
+      >
+        <v-card-title class="d-flex justify-center pa-0 mt-6"
+          >ログイン</v-card-title
+        >
+        <v-card-text class="d-flex justify-center flex-column">
+          <p class="text-center pt-3 mt-3 text-subtitle-1 siginIn-border-top">
+            ユーザー名でログイン
+          </p>
+          <v-form class="mx-9" ref="form" v-model="valid">
+            <v-text-field
+              placeholder="ユーザー名"
+              outlined
+              dense
+              v-model="user"
+              :rules="usrRules"
+            ></v-text-field>
+            <v-text-field
+              placeholder="パスワード"
+              outlined
+              dense
+              type="password"
+              v-model="password"
+              :rules="pwRules"
+            ></v-text-field>
+            <p class="pointer" @click="forgetPw">パスワードを忘れた方</p>
+            <div class="text-center">
+              <v-btn color="primary" :disabled="!valid" @click="postLogin()"
+                >ログイン</v-btn
+              >
+            </div>
+          </v-form>
+        </v-card-text>
+      </v-card>
+    </v-container>
   </v-app>
 </template>
 
@@ -48,8 +54,12 @@ export default {
   components: {
     Header,
   },
+
   data() {
     return {
+      valid: false,
+      usrRules: [(v) => !!v || "ユーザー名は必須です"],
+      pwRules: [(v) => !!v || "パスワードは必須です"],
       user: "",
       password: "",
     };
@@ -60,6 +70,13 @@ export default {
     };
   },
   methods: {
+    validate() {
+      this.$refs.form.validate();
+    },
+    forgetPw() {
+      // パスワードを忘れた時の処理
+    },
+
     async postLogin() {
       //認証情報が入っていない時だけ実行
       if (
@@ -71,15 +88,11 @@ export default {
           password: this.password,
         });
 
-        if (login_result.data) {
+        if (login_result && login_result.data) {
           this.$store.commit("accessToken", login_result.data.access_token);
           this.$store.commit("refreshToken", login_result.data.refresh_token);
         } else {
-          this.$swal.fire({
-            icon: "error",
-            title: "エラー",
-            text: login_result.data.detail,
-          });
+          console.log("Authenticate Error");
         }
       }
 
@@ -92,7 +105,7 @@ export default {
     },
   },
   created() {
-    this.$vuetify.theme.dark = true;
+    
 
     //認証したら/へジャンプする。
     const acsessToken = this.$store.getters.accessToken;

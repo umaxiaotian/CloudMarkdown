@@ -11,7 +11,7 @@
 
           <!-- コンテンツ一覧 -->
           <v-col cols="12" lg="8">
-            <v-icon large color="blue darken-2">
+            <v-icon large color="primary darken-2">
               mdi-file-search-outline
             </v-icon>
             <h1 v-if="is_search" v-text="result_text"></h1>
@@ -64,7 +64,7 @@ export default {
     },
   },
   created() {
-    this.$vuetify.theme.dark = true;
+    
 
     //外部から来た人向けのサーチパラムGET
     this.search_result = this.$route.query.searchText;
