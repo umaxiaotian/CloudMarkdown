@@ -44,6 +44,7 @@
                 placeholder="8文字以上の半角英数記号"
                 outlined
                 dense
+                type="password"
                 v-model="registerForm.password_first"
                 :rules="pwRules"
               ></v-text-field>
@@ -52,6 +53,7 @@
                 placeholder="8文字以上の半角英数記号"
                 outlined
                 dense
+                type="password"
                 v-model="registerForm.password_last"
                 :rules="pwRules"
               ></v-text-field>
