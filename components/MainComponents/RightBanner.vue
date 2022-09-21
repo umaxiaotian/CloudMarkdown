@@ -62,6 +62,7 @@ export default {
 
         backdrop: `
     rgba(0,0,123,0.4)
+    url("")
     left top
     no-repeat
   `,
