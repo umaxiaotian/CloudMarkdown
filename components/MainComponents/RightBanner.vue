@@ -62,7 +62,6 @@ export default {
 
         backdrop: `
     rgba(0,0,123,0.4)
-    url("`+extrafile+`/extraResource/IMG_2819.gif")
     left top
     no-repeat
   `,
