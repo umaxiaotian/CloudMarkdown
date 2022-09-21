@@ -1,7 +1,7 @@
 <template>
   <v-app
     style="
-      background-image: url('https://gochiusa.com/core_sys/images/main/cont/special/43/chino_1920.jpg');
+      background-image: url('http://www.wallpaper-box.com/forest/images/forest18.jpg');
       background-size: cover;
     "
   >
